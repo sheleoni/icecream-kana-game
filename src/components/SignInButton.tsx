@@ -1,8 +1,9 @@
 'use client';
 import React from "react";
 import {signIn, signOut, useSession} from "next-auth/react";
+import styles from './signinbutton.module.css';
 
-function SigninButton() {
+function SignInButton() {
     const { data: session } = useSession(); // useSession is a client component
 
 
@@ -11,7 +12,7 @@ function SigninButton() {
         return (
         <>
             <p> Hello { session.user.name }</p>
-            <button onClick={() => signOut()}>
+            <button className={styles.signInButton} onClick={() => signOut()}>
                 Sign Out~
             </button>
         </>
@@ -21,11 +22,11 @@ function SigninButton() {
     return (
         <>
         {/*signed out state*/}
-         <button onClick={() => signIn()}>
+         <button className={`${styles.signInButton} ${styles.signIn}`} onClick={() => signIn()}>
              Sign In!
          </button>
         </>
     )
 }
 
-export default SigninButton;
+export default SignInButton;

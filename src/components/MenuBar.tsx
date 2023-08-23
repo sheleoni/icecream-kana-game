@@ -1,10 +1,11 @@
 import React from "react";
-import SigninButton from "@/components/SigninButton";
+import SignInButton from "@/components/SignInButton";
+import styles from './menubar.module.css'
 
 const MenuBar = () => {
     return (
-    <header>
-        <SigninButton />
+    <header className={styles.menubar}>
+        <SignInButton />
     </header>
     )
 }
