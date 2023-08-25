@@ -12,11 +12,18 @@ const UserSchema = new Schema({
     },
     avatar: {
         type: String,
-    }
+    },
+    iceCreamCollection: [ // array of ice cream the user has unlocked
+        {
+            iceCream: { type: Schema.Types.ObjectId, ref: 'IceCream' },
+            unlocked: Boolean,
+            quantity: Number, // number of ice-cream scoops of that variety the user has earned
+        },
+    ],
 },
     {
     collection: 'userProgress'
-    } // not sure if this is entirely necessary but I'll just put it here
+    } // not sure if this is entirely necessary, but I'll just put it here
 );
 
 const User = models.User || model('User', UserSchema);
