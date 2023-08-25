@@ -9,10 +9,27 @@ export const connectDB = async () => {
             dbName: process.env.DB_NAME,
         });
         console.log("connected to MongoDB!");
-        const vanilla = new IceCream({ id: '1', name: 'Vanilla', imageURL: 'url_here' });
-        vanilla.save();
-        console.log("saved vailla ice cream to collection!")
+        await addInitialFlavors();
     } catch (error) {
         console.log(error);
     }
+};
+
+const addInitialFlavors = async () => {
+    const initialFlavors = [
+        { id: '1', name: 'Vanilla', imageURL: 'vanilla.png'},
+        { id: '2', name: 'Chocolate', imageURL: 'chocolate.png'},
+        { id: '3', name: 'Strawberry', imageURL: 'strawberry.png'},
+        { id: '4', name: 'OrangeSorbet', imageURL: 'orangeSorbet.png'},
+    ];
+
+    for (const flavor of initialFlavors) {
+        const existingFlavor = await IceCream.findOne({ id: flavor.id });
+        if (!existingFlavor) {
+            const iceCream = new IceCream(flavor);
+            await iceCream.save();
+            console.log(`Added ${flavor.name} ice-cream to collection!`)
+        }
+    }
+
 }
