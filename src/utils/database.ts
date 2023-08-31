@@ -10,9 +10,8 @@ export const connectDB = async () => {
             dbName: process.env.DB_NAME,
         });
         console.log("connected to MongoDB!");
-        await addInitialFlavors();
-        // await updateOneUser(); // todo: I get iceCreamCollection: []
-        await updateAllUsers();
+        // await addInitialFlavors();
+        // await updateAllUsers();
     } catch (error) {
         console.log(error);
     }
@@ -35,27 +34,16 @@ const addInitialFlavors = async () => {
         }
     }
 }
-
-// const updateOneUser = async () => {
-//     try {
-//         const result = await User.findOneAndUpdate(
-//             { email: 'sheleoni@gmail.com' }, // filter
-//             { $set: { "newFieldTest": [] } } // update document
-//         ).exec();
-//
-//         console.log('updateOneUser result:', result);
-//     } catch (error) {
-//         console.log('An error occurred:', error);
-//     }
-// };
-
 const updateAllUsers = async () => {
     try {
         const result = await User.updateMany(
             {}, // Empty filter, so it should update all documents
             { $set: {
-                "newFieldTest": [],
-                "unlockedIceCreams": [],
+                "unlockedIceCreams": [{
+                    iceCream: '64e8f67fcdf0a19aba869ce5',
+                    // iceCream: 'vanilla',
+                    quantity: 2,
+                }],
                 }
             } // Setting the "newFieldTest" to an empty array
         ).exec();
