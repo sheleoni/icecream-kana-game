@@ -1,22 +1,22 @@
 // 'use client'
 // todo: prop interface
-// todo: use useSession()
 
 import {getServerSession} from "next-auth";
 import getUserIceCream from "@/app/controllers/getUserIceCream";
+import styles from './page.module.css';
 
 export const dynamic = "force-dynamic"
 const CollectionOverview = async () => {
-    const session = getServerSession();
+    const session = await getServerSession();
+    console.log(session, `user`);
     const userIceCreamCollection = await getUserIceCream();
-    console.log(userIceCreamCollection[1])
     return (
         <>
-            Your ice-cream collection
+            Your ice-cream collection:
             {
                 userIceCreamCollection?.map((flavour: any, index: any): any => {
                     return (
-                        <p key={index}>
+                        <p key={index} className={styles.iceCreamItem}>
                             {flavour.name}
                         </p>
                     )
