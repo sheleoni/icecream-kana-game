@@ -4,13 +4,10 @@ export default async function getUserIceCream () {
     try {
         const response = await fetch('http://localhost:3000/api/user/userCollection', {
             method: 'GET',
-<<<<<<< Updated upstream
-=======
             headers: headers(), // todo: solve header problem
             // headers: {
             //     'Cache-Control': 'no-cache',
             // },
->>>>>>> Stashed changes
         });
         // console.log(headers(), `headers()!!`)
         // const iceCream = await response.json();
