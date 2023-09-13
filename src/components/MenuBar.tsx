@@ -9,17 +9,25 @@ const MenuBar = () => {
     <>
         <header className={styles.menubar}>
             <SignInButton />
+        <p>🍔Links:</p>
+        <ul>
+            <li>
+                <Link href={'/'} className={styles.menuLink}>
+                    Home (/)
+                </Link>
+            </li>
+            <li>
+                <Link href={'/user'} className={styles.menuLink}>
+                    /User
+                </Link>
+            </li>
+            <li>
+                <Link href={'/user/collection'} className={styles.menuLink}>
+                    /Collection
+                </Link>
+            </li>
+        </ul>
         </header>
-        <p>
-            <Link href={'/user'}>
-                User
-        </Link>
-        </p>
-        <p>
-        <Link href={'/user/collection'}>
-                Collection
-        </Link>
-        </p>
     </>
     )
 }
