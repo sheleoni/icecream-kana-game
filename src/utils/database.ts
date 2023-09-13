@@ -34,16 +34,23 @@ const addInitialFlavors = async () => {
         }
     }
 }
-const updateAllUsers = async () => {
+const updateAllUsers = async () => { // a test function for adding items to the unlockedIceCream array in the database
     try {
         const result = await User.updateMany(
             {}, // Empty filter, so it should update all documents
             { $set: {
-                "unlockedIceCreams": [{
+                "unlockedIceCreams": [
+                    {
                     iceCream: '64e8f67fcdf0a19aba869ce5',
                     // iceCream: 'vanilla',
                     quantity: 2,
-                }],
+                    },
+                    {
+                    iceCream: '64e8f67fcdf0a19aba869ceb',
+                    // iceCream: 'strawberry',
+                    quantity: 7,
+                    },
+                ],
                 }
             } // Setting the "newFieldTest" to an empty array
         ).exec();

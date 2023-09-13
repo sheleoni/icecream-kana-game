@@ -10,6 +10,7 @@ const CollectionOverview = async () => {
     const session = await getServerSession();
     console.log(session, `user`);
     const userIceCreamCollection = await getUserIceCream();
+    console.log(userIceCreamCollection, 'wowza!')
     return (
         <>
             Your ice-cream collection:
@@ -17,7 +18,7 @@ const CollectionOverview = async () => {
                 userIceCreamCollection?.map((flavour: any, index: any): any => {
                     return (
                         <p key={index} className={styles.iceCreamItem}>
-                            {flavour.name}
+                            {flavour.iceCream} you have {flavour.quantity}
                         </p>
                     )
                 })
