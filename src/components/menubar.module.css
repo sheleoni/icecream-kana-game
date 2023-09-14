@@ -2,8 +2,32 @@
     color: black;
     background-color: lightyellow;
     font-size: 2rem;
+    display: flex;
+    gap: 10px;
+    padding-block: 10px;
+    padding-inline: 10px;
+}
+
+.linkIndicator {
+    display: flex;
+    place-items: center;
+}
+
+.navMenu {
+    display: flex;
+    list-style: none;
 }
 
 .menuLink {
-    color: red;
+    color: #9a0f0f;
+    background-color: #efdda1;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 8px;
+    display: block;
+}
+
+.menuLink:hover {
+    color: #ffffff;
+    background-color: #866f1b;
 }
