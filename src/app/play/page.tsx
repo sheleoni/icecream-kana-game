@@ -5,8 +5,10 @@ import Bubbles from "@/components/Bubbles";
 import Hexagons from "@/components/Hexagons";
 import IceCreamStack from "@/components/IceCreamStack";
 import characterList from "@/letterData/characterList";
-
+import {useSession} from "next-auth/react";
+import Link from 'next/link';
 const Play = () => {
+    const { data: session } = useSession(); // useSession is a client component
 
     const generateQuestion = () => {
         const randomIndex = Math.floor(Math.random() * characterList.length);
@@ -15,21 +17,35 @@ const Play = () => {
 
     const currentQuestionLetter = generateQuestion();
     console.log(currentQuestionLetter, `current question`)
-
+    if (session && session.user) {
+        return (
+            <>
+                <p>
+                    <QuestionWord currentQuestionLetter={currentQuestionLetter} />
+                </p>
+                    <p>
+                    <Bubbles />
+                </p>
+                <p>
+                    <Hexagons />
+                </p>
+                <p>
+                    <IceCreamStack />
+                </p>
+            </>
+        )
+    }
     return (
         <>
-            <p>
-                <QuestionWord currentQuestionLetter={currentQuestionLetter} />
-            </p>
-                <p>
-                <Bubbles />
-            </p>
-            <p>
-                <Hexagons />
-            </p>
-            <p>
-                <IceCreamStack />
-            </p>
+        <p>
+            You are not logged in yet.
+        </p>
+            <Link href={"https://hiragana-icecream.sheleoni.com/"} style={{ color: "coral", fontSize: "4rem"}}>
+                👉 Click me! 👈
+            </Link>
+        <p>
+            Try out the game (in guest mode).
+        </p>
         </>
     )
 }
