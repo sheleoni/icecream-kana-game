@@ -26,3 +26,8 @@
     margin: 8px;
     display: block;
 }
+
+.menuLink:hover {
+    color: #ffffff;
+    background-color: #866f1b;
+}
