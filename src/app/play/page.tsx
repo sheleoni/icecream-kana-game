@@ -7,16 +7,25 @@ import IceCreamStack from "@/components/IceCreamStack";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
+import React from "react";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
+    const [currentQuestionLetter, setCurrentQuestionLetter] = React.useState< string | null>(null);
 
-    const generateQuestion = () => {
-        const randomIndex = Math.floor(Math.random() * characterList.length);
-        return characterList[randomIndex]
-    }
+    React.useEffect(() => {
+        // We need useEffect here because if we don't,
+        // a random character will be generated whenever the user clicks to another tab and comes back
+        // (this happens in both dev mode and production mode)
+        const generateQuestion = () => {
+            const randomIndex = Math.floor(Math.random() * characterList.length);
+            return characterList[randomIndex]
+        }
+        const currentQuestionLetter = generateQuestion();
+        console.log(currentQuestionLetter, `current question`)
+        setCurrentQuestionLetter(currentQuestionLetter);
+    }, [])
 
-    const currentQuestionLetter = generateQuestion();
-    console.log(currentQuestionLetter, `current question`)
+
     if (session && session.user) {
         // Logged in state
         return (

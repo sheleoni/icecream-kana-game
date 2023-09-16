@@ -1,7 +1,7 @@
 import styles from './QuestionWord.module.css';
 
 type Props = {
-    currentQuestionLetter : string
+    currentQuestionLetter : string | null
 }
 const QuestionWord = ({ currentQuestionLetter }: Props) => {
 return (
