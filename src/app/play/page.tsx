@@ -12,19 +12,20 @@ const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [currentQuestionLetter, setCurrentQuestionLetter] = React.useState< string | null>(null);
 
+    /* Picking a random character from the question pool START */
+    const generateQuestion = (): string => {
+        const randomIndex = Math.floor(Math.random() * characterList.length);
+        return characterList[randomIndex]
+    }
     React.useEffect(() => {
         // We need useEffect here because if we don't,
         // a random character will be generated whenever the user clicks to another tab and comes back
         // (this happens in both dev mode and production mode)
-        const generateQuestion = () => {
-            const randomIndex = Math.floor(Math.random() * characterList.length);
-            return characterList[randomIndex]
-        }
         const currentQuestionLetter = generateQuestion();
         console.log(currentQuestionLetter, `current question`)
         setCurrentQuestionLetter(currentQuestionLetter);
     }, [])
-
+    /* Picking a random character from the question pool END */
 
     if (session && session.user) {
         // Logged in state
@@ -32,6 +33,7 @@ const Play = () => {
             <>
                 <p>
                     <QuestionWord
+                        generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
                         currentQuestionLetter={currentQuestionLetter}
                     />
                 </p>
