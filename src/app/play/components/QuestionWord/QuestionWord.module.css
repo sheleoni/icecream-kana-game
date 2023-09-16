@@ -1,0 +1,13 @@
+.questionLetterContainer {
+    display: flex;
+    place-items: center;
+    background-color: #efdda1;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.questionLetter {
+    font-size: 4rem;
+    color: deepskyblue;
+    cursor: pointer;
+}

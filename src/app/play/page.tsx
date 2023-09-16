@@ -1,6 +1,6 @@
 'use client'
 
-import QuestionWord from "@/components/QuestionWord";
+import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import Bubbles from "@/components/Bubbles";
 import Hexagons from "@/components/Hexagons";
 import IceCreamStack from "@/components/IceCreamStack";
@@ -18,10 +18,13 @@ const Play = () => {
     const currentQuestionLetter = generateQuestion();
     console.log(currentQuestionLetter, `current question`)
     if (session && session.user) {
+        // Logged in state
         return (
             <>
                 <p>
-                    <QuestionWord currentQuestionLetter={currentQuestionLetter} />
+                    <QuestionWord
+                        currentQuestionLetter={currentQuestionLetter}
+                    />
                 </p>
                     <p>
                     <Bubbles />
@@ -36,6 +39,7 @@ const Play = () => {
         )
     }
     return (
+        // Logged-out state
         <>
         <p>
             You are not logged in yet.
