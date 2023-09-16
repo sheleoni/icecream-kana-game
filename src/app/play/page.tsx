@@ -40,7 +40,11 @@ const Play = () => {
         <p>
             You are not logged in yet.
         </p>
-            <Link href={"https://hiragana-icecream.sheleoni.com/"} style={{ color: "coral", fontSize: "4rem"}}>
+            <Link
+                href={"https://hiragana-icecream.sheleoni.com/"}
+                style={{ color: "coral", fontSize: "4rem"}}
+                target={"_blank"}
+            >
                 👉 Click me! 👈
             </Link>
         <p>
