@@ -1,4 +1,4 @@
-const Hexagons = () => {
+const IceCreamStack = () => {
 return (
     <>
         🍨🍧🍨🍧🍨🍧 （Ice-cream stack）
@@ -6,4 +6,4 @@ return (
 )
 }
 
-export default Hexagons;
+export default IceCreamStack;
