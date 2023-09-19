@@ -1,6 +1,54 @@
-const QuestionWord = () => {
-
-
+.button {
+    all: unset;
+    width: 10px;
 }
 
-export const Qu
+.checkboxContainer {
+    display: flex;
+}
+
+
+.CheckboxRoot {
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px black;
+}
+
+.CheckboxRoot:hover {
+    /* when checkbox label / checkbox is hovered */
+    background-image: linear-gradient(
+            5deg,
+            hsl(217deg 92% 29%) 0%,
+            hsl(212deg 100% 34%) 9%,
+            hsl(209deg 100% 38%) 18%,
+            hsl(206deg 100% 41%) 27%,
+            hsl(201deg 100% 43%) 36%,
+            hsl(196deg 100% 42%) 45%,
+            hsl(188deg 100% 40%) 55%,
+            hsl(177deg 100% 38%) 64%,
+            hsl(165deg 100% 41%) 73%,
+            hsl(154deg 100% 44%) 82%,
+            hsl(142deg 100% 47%) 91%,
+            hsl(101deg 96% 56%) 100%
+    );}
+
+/*.CheckboxRoot:focus {*/
+/*    !* when checkbox label / checkbox is clicked *!*/
+/*    box-shadow: 0 0 0 2px black;*/
+/*}*/
+
+.CheckboxIndicator {
+    color: blueviolet;
+}
+
+.Label {
+    color: white;
+    padding-left: 15px;
+    font-size: 15px;
+    line-height: 1;
+}
