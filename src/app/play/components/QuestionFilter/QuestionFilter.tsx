@@ -3,17 +3,27 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
 import styles from './QuestionFilter.module.css';
 import {useState} from "react";
-import FilterOptions from "@/app/play/components/QuestionFilter/FilterOptions";
+import {FilterOptions} from "@/app/play/components/QuestionFilter/FilterOptions";
+import {filterOptions} from "mongodb/src/utils";
+
 
 const QuestionFilter = () => {
 
     const HIRAGANA_MODE = "hiragana";
     const KATAKANA_MODE = "katakana";
-    const [filterMode, setFilterMode] = useState<string>(HIRAGANA_MODE); // toggle between Hiragana or Katakana mode
+
+    type FilterOptions = {
+        hiragana: { [character: string]: boolean},
+        katakana: { [character: string]: boolean}
+    }
+
+    type FilterMode = typeof HIRAGANA_MODE | typeof KATAKANA_MODE;
+
+    const [filterMode, setFilterMode] = useState<FilterMode>(HIRAGANA_MODE); // toggle between Hiragana or Katakana mode
 
     const switchMode = (filterMode: string): void => {
         console.log("switch modes")
-        let newMode;
+        let newMode: FilterMode;
         // toggles between Hiragana and Katakana modes
         if (filterMode === HIRAGANA_MODE) {
             newMode = KATAKANA_MODE;
@@ -82,5 +92,6 @@ const QuestionFilter = () => {
         </>
     )
 }
+
 
 export default QuestionFilter;

@@ -1,4 +1,4 @@
-const FilterOptions = {
+export const FilterOptions = {
     // all options are initialized to false on initial load
     hiragana: {
         'あ': false,
@@ -36,4 +36,3 @@ const FilterOptions = {
     }
 }
 
-export default FilterOptions;
