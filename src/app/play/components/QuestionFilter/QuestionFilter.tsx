@@ -4,7 +4,6 @@ import * as Checkbox from "@radix-ui/react-checkbox";
 import styles from './QuestionFilter.module.css';
 import {useState} from "react";
 import {FilterOptions} from "@/app/play/components/QuestionFilter/FilterOptions";
-import {filterOptions} from "mongodb/src/utils";
 
 
 const QuestionFilter = () => {
