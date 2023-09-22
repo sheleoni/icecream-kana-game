@@ -1,8 +1,8 @@
 export const FilterOptions = {
     // all options are initialized to false on initial load
     hiragana: {
-        'あ': false,
-        'か': false,
+        'あ': true,
+        'か': true,
         'さ': false,
         'た': false,
         'な': false,
