@@ -65,37 +65,28 @@ const QuestionFilter = () => {
                 <button onClick={() => switchMode(filterMode)}>
                     Switch mode
                 </button>
-                <li className={styles.checkboxContainer}>
+                <ul className={styles.checkboxContainer}>
                     { filterEntries.map(([character, isChecked]) => {
                         return (
-                                <ul key={character}>
+                                <li key={character} className={styles.choice}>
                                     <Checkbox.Root
                                         className={`${styles.CheckboxRoot} ${styles.button}`}
                                         id={character}
                                         checked={isChecked}
                                         onCheckedChange={() => handleCheckedChange(character, isChecked)}
                                     >
-                                        <Checkbox.Indicator>
-                                            ✔
+                                        <Checkbox.Indicator className={styles.CheckboxIndicator}>
+                                            ✦
                                         </Checkbox.Indicator>
                                     </Checkbox.Root>
                                     <label className={styles.Label} htmlFor={character}>
-                                        {character}
+                                        {character}行
                                     </label>
-                                </ul>
+                                </li>
                         )
                     })}
-                    <ul>
-                    <Checkbox.Root className={`${styles.CheckboxRoot} ${styles.button}`} id={"foo"}>
-                        <Checkbox.Indicator>
-                           ✔
-                        </Checkbox.Indicator>
-                    </Checkbox.Root>
-                    <label className={styles.Label} htmlFor={"foo"}>
-                        HELLO
-                    </label>
-                    </ul>
-                </li>
+
+                </ul>
             </aside>
         </>
     )
