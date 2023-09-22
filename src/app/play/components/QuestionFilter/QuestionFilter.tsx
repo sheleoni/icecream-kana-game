@@ -85,9 +85,14 @@ const QuestionFilter = () => {
                                 </li>
                         )
                     })}
-
                 </ul>
             </aside>
+            <p>
+            Selected rows:
+            </p>
+            <p>
+            Question pool:
+            </p>
         </>
     )
 }
