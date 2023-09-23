@@ -16,16 +16,18 @@ const Play = () => {
 
     /* Picking a random character from the question pool START */
     const generateQuestion = (): string => {
-        const randomIndex = Math.floor(Math.random() * characterList.length);
-        return characterList[randomIndex]
+        const randomIndex = Math.floor(Math.random() * questionPool.length);
+        return questionPool[randomIndex]
     }
     React.useEffect(() => {
-        // We need useEffect here because if we don't,
-        // a random character will be generated whenever the user clicks to another tab and comes back
-        // (this happens in both dev mode and production mode)
-        const currentQuestionLetter = generateQuestion();
-        setCurrentQuestionLetter(currentQuestionLetter);
-    }, [])
+        if (questionPool.length > 0) {
+            // We need useEffect here because if we don't,
+            // a random character will be generated whenever the user clicks to another tab and comes back
+            // (this happens in both dev mode and production mode)
+            const currentQuestionLetter = generateQuestion();
+            setCurrentQuestionLetter(currentQuestionLetter);
+        }
+    }, [questionPool])
     /* Picking a random character from the question pool END */
 
     if (session && session.user) {
