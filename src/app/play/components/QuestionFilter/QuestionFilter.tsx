@@ -2,9 +2,9 @@
 
 import * as Checkbox from "@radix-ui/react-checkbox";
 import styles from './QuestionFilter.module.css';
-import {useState} from "react";
+import {ReactElement, useState, useEffect} from "react";
 import {FilterOptions as InitialFilterOptionsData} from "@/app/play/components/QuestionFilter/FilterOptions";
-
+import CharactersByRow from "@/app/play/components/QuestionFilter/CharactersByRow";
 
 const QuestionFilter = () => {
 
@@ -33,7 +33,8 @@ const QuestionFilter = () => {
         }
     };
 
-    const filterEntries = Object.entries(filterOptions[filterMode]);
+    const currentModeRowCharacters = filterOptions[filterMode]; // shows all row characters in the currently selected mode;
+    const filterEntries = Object.entries(currentModeRowCharacters);
     /* transforms, for example,
         {
         'あ': false,
@@ -48,6 +49,35 @@ const QuestionFilter = () => {
         ]
         and so on...
      */
+
+    const hiraganaRowCharacters = filterOptions[HIRAGANA_MODE];
+    const katakanaRowCharacters = filterOptions[KATAKANA_MODE];
+    const allRowCharacters = { ...hiraganaRowCharacters, ...katakanaRowCharacters};
+    // ↑ creates a 1-dimensional object containing all hiragana & katakana rows with their isChecked value
+    // { 'あ': true, 'い': true } and so on
+    const allRowCharactersArray = Object.entries(allRowCharacters);
+    // ↑ creates an array: [['あ', true], ['か', true]] and so on
+
+    // useEffect(() => {
+        const generateQuestionPool = () => {
+            console.log(allRowCharacters, `all row chars`)
+            let questionPool: [] = [];
+                allRowCharactersArray.forEach(([row, isChecked]) => {
+                    let charactersInRow = CharactersByRow[row];
+                    console.log(charactersInRow, 'row chars', isChecked)
+                    if (isChecked) {
+                        charactersInRow.forEach((characterInRow) => {
+                        questionPool.push(characterInRow)
+                        })
+                    } // todo: fix type error
+            })
+            console.log(questionPool, 'question pool')
+            return questionPool;
+        }
+    const questionPool = generateQuestionPool();
+
+    // }, [])
+
 
     const handleCheckedChange = (character: string, isChecked: boolean) => {
         const filterList = filterOptions[filterMode];
@@ -89,9 +119,30 @@ const QuestionFilter = () => {
             </aside>
             <p>
             Selected rows:
+                {
+                    Object.entries(allRowCharacters).map(([row, isChecked]: [string, boolean]) => {
+                        return (
+                           isChecked && (<p key={row}>
+                               { row }行：
+                               { CharactersByRow[row].map((character): ReactElement => {
+                                    return (<span key={row}>{character}</span>)
+                               })
+                               }
+                            {/*   todo: fix type error */}
+                            </p>)
+                        )
+                    })
+                }
             </p>
             <p>
             Question pool:
+                { questionPool.map((character) => {
+                    return (
+                        <span key={character}>
+                            {character}
+                        </span>
+                    )
+                })}
             </p>
         </>
     )
