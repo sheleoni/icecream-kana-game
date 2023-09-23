@@ -58,26 +58,23 @@ const QuestionFilter = () => {
     const allRowCharactersArray = Object.entries(allRowCharacters);
     // ↑ creates an array: [['あ', true], ['か', true]] and so on
 
-    // useEffect(() => {
-        const generateQuestionPool = () => {
+        const generateQuestionPool = () => { // adds characters from selected character rows to a 1-D array.
             console.log(allRowCharacters, `all row chars`)
-            let questionPool: [] = [];
-                allRowCharactersArray.forEach(([row, isChecked]) => {
-                    let charactersInRow = CharactersByRow[row];
+            let questionPool: string[] = [];
+                allRowCharactersArray.forEach(([row, isChecked]: [string, boolean]) => {
+                    let charactersInRow = CharactersByRow[row as keyof typeof CharactersByRow];
+                    // ↑ type definition that "row" should only be any kana character あ〜ン
                     console.log(charactersInRow, 'row chars', isChecked)
                     if (isChecked) {
-                        charactersInRow.forEach((characterInRow) => {
+                        charactersInRow.forEach((characterInRow: string): void => {
                         questionPool.push(characterInRow)
                         })
-                    } // todo: fix type error
+                    }
             })
             console.log(questionPool, 'question pool')
             return questionPool;
         }
     const questionPool = generateQuestionPool();
-
-    // }, [])
-
 
     const handleCheckedChange = (character: string, isChecked: boolean) => {
         const filterList = filterOptions[filterMode];
