@@ -1,0 +1,87 @@
+.button {
+    all: unset;
+    width: 10px;
+}
+
+.checkboxContainer {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    font-size: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    width: fit-content;
+    background-color: floralwhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.CheckboxRoot {
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(
+            45deg,
+            hsl(237deg 71% 70%) 0%,
+            hsl(237deg 73% 69%) 11%,
+            hsl(237deg 75% 69%) 22%,
+            hsl(237deg 77% 68%) 33%,
+            hsl(237deg 79% 67%) 44%,
+            hsl(237deg 81% 67%) 56%,
+            hsl(237deg 82% 66%) 67%,
+            hsl(237deg 84% 65%) 78%,
+            hsl(237deg 85% 65%) 89%,
+            hsl(237deg 86% 64%) 100%
+    );
+}
+
+.CheckboxRoot:hover {
+    /* when checkbox label / checkbox is hovered */
+    background-image: linear-gradient(
+            45deg,
+            hsla(237deg, 71%, 70%, 0.7) 0%,
+            hsla(237deg, 73%, 69%, 0.7) 11%,
+            hsla(237deg, 75%, 69%, 0.7) 22%,
+            hsla(237deg, 77%, 68%, 0.7) 33%,
+            hsla(237deg, 79%, 67%, 0.7) 44%,
+            hsla(237deg, 81%, 67%, 0.7) 56%,
+            hsla(237deg, 82%, 66%, 0.7) 67%,
+            hsl(237deg, 84%, 65%, 0.7) 78%,
+            hsla(237deg, 85%, 65%, 0.7) 89%,
+            hsla(237deg, 86%, 64%, 0.7) 100%
+    );
+}
+
+.CheckboxRoot:focus {
+    /* when checkbox label / checkbox is clicked */
+    box-shadow: 0 0 0 2px deeppink;
+}
+
+.CheckboxIndicator {
+    color: floralwhite;
+    font-size: 15px;
+}
+
+.Label {
+    padding-left: 10px;
+    font-size: 15px;
+    line-height: 1;
+    color: #535bf2;
+    cursor: pointer;
+}
+
+.choice {
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    background: hsl(237, 86%, 64%, 0.2);
+    border-radius: 5px;
+    padding-inline: 10px;
+    padding-block: 5px;
+    place-items: center;
+    cursor: pointer;
+}

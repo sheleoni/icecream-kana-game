@@ -1,9 +1,10 @@
 'use client'
 
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
-import Bubbles from "@/components/Bubbles";
-import Hexagons from "@/components/Hexagons";
-import IceCreamStack from "@/components/IceCreamStack";
+import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
+import Bubbles from "@/app/play/components/Bubbles";
+import Hexagons from "@/app/play/components/Hexagons";
+import IceCreamStack from "@/app/play/components/IceCreamStack";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
@@ -31,6 +32,11 @@ const Play = () => {
         // Logged in state
         return (
             <>
+                <p>
+                    Question Filter
+                    <br />
+                    <QuestionFilter />
+                </p>
                 <p>
                     <QuestionWord
                         generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
