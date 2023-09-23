@@ -3,9 +3,10 @@ import styles from './QuestionWord.module.css';
 type Props = {
     currentQuestionLetter : string | null,
     generateQuestion: () => void,
+    questionPool: string[]
 }
-const QuestionWord = ({ currentQuestionLetter, generateQuestion }: Props) => {
-return (
+const QuestionWord = ({ currentQuestionLetter, generateQuestion, questionPool }: Props) => {
+    return (
     <>
         <article className={styles.questionLetterContainer} onClick={generateQuestion}>
             (Question Word)

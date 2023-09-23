@@ -3,10 +3,16 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
 import styles from './QuestionFilter.module.css';
 import {ReactElement, useState, useEffect} from "react";
+import React from "react";
 import {FilterOptions as InitialFilterOptionsData} from "@/app/play/components/QuestionFilter/FilterOptions";
 import CharactersByRow from "@/app/play/components/QuestionFilter/CharactersByRow";
 
-const QuestionFilter = () => {
+
+type Props = {
+    questionPool: string[],
+    setQuestionPool: React.Dispatch<React.SetStateAction<string[]>>
+}
+const QuestionFilter = ({ questionPool, setQuestionPool }: Props) => {
 
     const HIRAGANA_MODE = "hiragana";
     const KATAKANA_MODE = "katakana";
@@ -58,26 +64,32 @@ const QuestionFilter = () => {
     const allRowCharactersArray = Object.entries(allRowCharacters);
     // ↑ creates an array: [['あ', true], ['か', true]] and so on
 
-        const generateQuestionPool = () => { // adds characters from selected character rows to a 1-D array.
-            let questionPool: string[] = [];
+    const generateQuestionPool = () => { // adds characters from selected character rows to a 1-D array.
+            let newQuestionPool: string[] = [];
                 allRowCharactersArray.forEach(([row, isChecked]: [string, boolean]) => {
                     let charactersInRow = CharactersByRow[row as keyof typeof CharactersByRow];
                     // ↑ type definition that "row" should only be any kana character あ〜ン
                     if (isChecked) {
                         charactersInRow.forEach((characterInRow: string): void => {
-                        questionPool.push(characterInRow)
+                            newQuestionPool.push(characterInRow)
                         })
                     }
             })
-            return questionPool;
+            return newQuestionPool;
         }
-    const questionPool = generateQuestionPool();
+    const newQuestionPool = generateQuestionPool();
+    useEffect(() => { // this function will be triggered whenever user checks/ unchecks the filter list
+        const newQuestionPool = generateQuestionPool();
+        setQuestionPool(newQuestionPool);
+    }, [filterOptions]); // [filterOptions], despite being a nested object, can help detect change since state updates creates a reference to a new object
+    // todo: solve dependency array warning
 
     const handleCheckedChange = (character: string, isChecked: boolean) => {
         const filterList = filterOptions[filterMode];
         const nextFilterList = { ...filterList, [character]: !isChecked };
         setFilterOptions({ ...filterOptions, [filterMode]: nextFilterList });
         // todo: POST data to database
+        const testNewQPool = generateQuestionPool();
     }
 
     return (
