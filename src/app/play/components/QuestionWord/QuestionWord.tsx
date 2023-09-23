@@ -5,11 +5,11 @@ type Props = {
     generateQuestion: () => void,
 }
 const QuestionWord = ({ currentQuestionLetter, generateQuestion }: Props) => {
-return (
+    // todo: prevent next question to be the same question as the previous (i.e. prevent two consecutive identical questions)
+    return (
     <>
-        <article className={styles.questionLetterContainer} onClick={generateQuestion}>
-            (Question Word)
-            <p className={styles.questionLetter} suppressHydrationWarning={true}>
+        <article key={currentQuestionLetter} className={styles.questionLetterContainer} onClick={generateQuestion}>
+            <p className={`${styles.questionLetter} ${styles.animation}`} suppressHydrationWarning={true}>
             {currentQuestionLetter}
             </p>
         </article>

@@ -8,24 +8,26 @@ import IceCreamStack from "@/app/play/components/IceCreamStack";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
-import React from "react";
+import React, {useState} from "react";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [currentQuestionLetter, setCurrentQuestionLetter] = React.useState< string | null>(null);
+    const [ questionPool, setQuestionPool] = useState<string[]>([]);
 
     /* Picking a random character from the question pool START */
     const generateQuestion = (): string => {
-        const randomIndex = Math.floor(Math.random() * characterList.length);
-        return characterList[randomIndex]
+        const randomIndex = Math.floor(Math.random() * questionPool.length);
+        return questionPool[randomIndex]
     }
     React.useEffect(() => {
-        // We need useEffect here because if we don't,
-        // a random character will be generated whenever the user clicks to another tab and comes back
-        // (this happens in both dev mode and production mode)
-        const currentQuestionLetter = generateQuestion();
-        console.log(currentQuestionLetter, `current question`)
-        setCurrentQuestionLetter(currentQuestionLetter);
-    }, [])
+        if (questionPool.length > 0) {
+            // We need useEffect here because if we don't,
+            // a random character will be generated whenever the user clicks to another tab and comes back
+            // (this happens in both dev mode and production mode)
+            const currentQuestionLetter = generateQuestion();
+            setCurrentQuestionLetter(currentQuestionLetter);
+        }
+    }, [questionPool])
     /* Picking a random character from the question pool END */
 
     if (session && session.user) {
@@ -35,7 +37,10 @@ const Play = () => {
                 <p>
                     Question Filter
                     <br />
-                    <QuestionFilter />
+                    <QuestionFilter
+                        questionPool={questionPool}
+                        setQuestionPool={setQuestionPool}
+                    />
                 </p>
                 <p>
                     <QuestionWord
