@@ -59,19 +59,16 @@ const QuestionFilter = () => {
     // ↑ creates an array: [['あ', true], ['か', true]] and so on
 
         const generateQuestionPool = () => { // adds characters from selected character rows to a 1-D array.
-            console.log(allRowCharacters, `all row chars`)
             let questionPool: string[] = [];
                 allRowCharactersArray.forEach(([row, isChecked]: [string, boolean]) => {
                     let charactersInRow = CharactersByRow[row as keyof typeof CharactersByRow];
                     // ↑ type definition that "row" should only be any kana character あ〜ン
-                    console.log(charactersInRow, 'row chars', isChecked)
                     if (isChecked) {
                         charactersInRow.forEach((characterInRow: string): void => {
                         questionPool.push(characterInRow)
                         })
                     }
             })
-            console.log(questionPool, 'question pool')
             return questionPool;
         }
     const questionPool = generateQuestionPool();
@@ -80,8 +77,6 @@ const QuestionFilter = () => {
         const filterList = filterOptions[filterMode];
         const nextFilterList = { ...filterList, [character]: !isChecked };
         setFilterOptions({ ...filterOptions, [filterMode]: nextFilterList });
-        console.log("check changed!")
-        console.log(nextFilterList)
         // todo: POST data to database
     }
 
@@ -114,33 +109,6 @@ const QuestionFilter = () => {
                     })}
                 </ul>
             </aside>
-            <p>
-            Selected rows:
-                {
-                    Object.entries(allRowCharacters).map(([row, isChecked]: [string, boolean]) => {
-                        return (
-                           isChecked && (<p key={row}>
-                               { row }行：
-                               { CharactersByRow[row].map((character): ReactElement => {
-                                    return (<span key={row}>{character}</span>)
-                               })
-                               }
-                            {/*   todo: fix type error */}
-                            </p>)
-                        )
-                    })
-                }
-            </p>
-            <p>
-            Question pool:
-                { questionPool.map((character) => {
-                    return (
-                        <span key={character}>
-                            {character}
-                        </span>
-                    )
-                })}
-            </p>
         </>
     )
 }
