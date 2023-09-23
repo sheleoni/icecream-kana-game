@@ -46,7 +46,6 @@ const Play = () => {
                     <QuestionWord
                         generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
                         currentQuestionLetter={currentQuestionLetter}
-                        questionPool={questionPool}
                     />
                 </p>
                     <p>
