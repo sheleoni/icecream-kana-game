@@ -3,12 +3,12 @@
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
 import Bubbles from "@/app/play/components/Bubbles/page";
-import Hexagons from "@/app/play/components/Hexagons";
 import IceCreamStack from "@/app/play/components/IceCreamStack";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
 import React, {useState} from "react";
+import Hexagons from "@/app/play/components/Hexagons/page";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [currentQuestionLetter, setCurrentQuestionLetter] = React.useState< string | null>(null);

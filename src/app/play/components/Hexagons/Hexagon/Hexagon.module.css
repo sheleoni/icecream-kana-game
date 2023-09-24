@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
+
+
+
+.root {
+    --hexagon-width: 150px;
+    --hexagon-height: var(--hexagon-width);
+}
+
+.activeHexagon {
+    z-index: 3;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.starButton {
+    /*height: 20px;*/
+    /*width: 20px;*/
+    padding: 0;
+}
+
+.hexagonWrapper {
+    height: var(--hexagon-height);
+    width: var(--hexagon-width);
+    position: relative;
+    display: inline-block;
+}
+
+.letter {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 60px;
+    position: absolute;
+    color: black;
+    top: 20%;
+    left: 30%;
+    z-index: 3;
+}
+
+.hexagonWrapper:nth-of-type(even) {
+    top: 33%;
+}
+
+.hexagonOutline {
+    height: var(--hexagon-height);
+    width: var(--hexagon-width);
+    position: absolute;
+    left: 0;
+    z-index: 4;
+}
+
+.hexagonBackgroundContainer {
+    position: absolute;
+}
+
+.hexagonBackground {
+    position: absolute;
+    height: var(--hexagon-height);
+    width: var(--hexagon-width);
+    z-index: 1;
+}
+
+.mask1 {
+    position: absolute;
+    left: 50%;
+    z-index: 1; /* z-index here must be larger than 0 for the wave image to be visible. If do not specify a z-index, it will inherit its parent's z-index */
+    /* note: add dynamic link to control w_100, h_100 to prevent intrinsic size */
+    -webkit-mask-image: url(https://res.cloudinary.com/dd1dw34dc/image/upload/v1676741078/hiragana_game/Hexagonal_aiueo_2_bmkrho.png);
+    mask-image: url(https://res.cloudinary.com/dd1dw34dc/image/upload/v1676741078/hiragana_game/Hexagonal_aiueo_2_bmkrho.png);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-size: var(--hexagon-width) var(--hexagon-height);
+    -webkit-mask-size: var(--hexagon-width) var(--hexagon-height);
+    height: var(--hexagon-height);
+    width: var(--hexagon-width);
+}
+
+/* https://res.cloudinary.com/demo/image/upload/e_colorize,co_pink,w_200,h_200/hexagon_sample.png */
+.waveWrapper {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.movingWave {
+    margin-block-start: 60px; /* controls tide level */
+    margin-inline-start: -1px; /* use -1px to avoid thin hairline between wave images at the end of cycle */
+    display: inline-block;
+    animation: scroll 10s linear infinite;
+    width: var(--hexagon-width); /* todo: consider hexagon adding hexagon dimensions as CSS variable */
+    transition: margin-top 0.5s ease-out;
+    z-index: 100;
+    pointer-events: none;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
