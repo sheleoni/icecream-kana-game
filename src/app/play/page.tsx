@@ -2,7 +2,7 @@
 
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
-import Bubbles from "@/app/play/components/Bubbles";
+import Bubbles from "@/app/play/components/Bubbles/page";
 import Hexagons from "@/app/play/components/Hexagons";
 import IceCreamStack from "@/app/play/components/IceCreamStack";
 import characterList from "@/letterData/characterList";

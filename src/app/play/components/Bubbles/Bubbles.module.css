@@ -1,0 +1,126 @@
+.bubbleAreaContainer {
+
+    width: 60vw;
+    height: 50vh;
+    background-color: burlywood;
+    border-radius: 5px;
+    flex-direction: column;
+    position: relative;
+}
+
+.bubbleImage {
+    width: 80%;
+    height: 100%;
+    aspect-ratio: 1;
+}
+
+.bubbleContainer {
+    position: absolute;
+    width: 30%;
+    color: black;
+    cursor: pointer;
+    /* animation configurations */
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    /* centering letters */
+    justify-items: center;
+    align-items: center;
+    display: block;
+}
+
+/* bubble bouncing animation */
+@keyframes bubble-right {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: rotate(5deg) translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes bubble-left {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: rotate(-5deg) translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.bubbleContainer:nth-of-type(odd) {
+    animation-name: bubble-right;
+}
+.bubbleContainer:nth-of-type(even) {
+    animation-name: bubble-left;
+}
+.bubbleImage:nth-of-type(odd)  {
+    transform: rotate(5deg);
+}
+
+.bubbleImage:nth-of-type(even) {
+    transform: rotate(-5deg) scaleX(-1);
+}
+
+/* position individual bubbles */
+.bubbleContainer:nth-of-type(1) {
+    top: 10%;
+    left: 5%;
+}
+.bubbleContainer:nth-of-type(2) {
+    top: 5%;
+    left: 35.5%;
+}
+.bubbleContainer:nth-of-type(3) {
+    top: 13%;
+    left: 65%;
+}
+.bubbleContainer:nth-of-type(4) {
+    top: 50%;
+    left: 20%;
+}
+.bubbleContainer:nth-of-type(5) {
+    top: 55%;
+    left: 55%;
+}
+
+/* Letters in bubbles */
+.choiceLetter {
+    min-width: 5rem; /* min-width is set so that choices with extreme length (1/ 3 characters) like "i", "tsu" can be centered with text-align */
+    text-align: center;
+    left: 18%;
+    top: 20%;
+    position: absolute;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 900;
+    font-size: 3.6rem;
+    height: fit-content;
+}
+
+.bubbleContainer:nth-of-type(1) > .choiceLetter {
+    color: red;
+}
+
+.bubbleContainer:nth-of-type(2) > .choiceLetter {
+    color: orangered;
+}
+
+.bubbleContainer:nth-of-type(3) > .choiceLetter {
+    color: darkorange;
+}
+
+.bubbleContainer:nth-of-type(4) > .choiceLetter {
+    color: goldenrod;
+}
+
+.bubbleContainer:nth-of-type(5) > .choiceLetter {
+    color: forestgreen;
+}
+
+/* todo: consider getting length of choice (e.g. 'i' = 1; 'tsu' = 3 and adjust size with different CSS classes */
+/* todo: adjust font size with screen width with @media queries */
