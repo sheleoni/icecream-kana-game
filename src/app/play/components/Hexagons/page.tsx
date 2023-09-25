@@ -1,4 +1,5 @@
 import Hexagon from "@/app/play/components/Hexagons/Hexagon/page";
+import styles from './Hexagons.module.css';
 
 const Hexagons = () => {
     const tempHexagonTideLevelsObject = {
@@ -15,19 +16,18 @@ const Hexagons = () => {
 
     return (
         <>
+            <ol className={styles.hexagonsContainer}>
             {
                 tempHexagonTideLevelsArray.map(([character, tideLevel]: [string, number]) => {
                     return (
-                        <>
-                            <p>
+                            <li key={character} className={styles.hexagon}>
                                 <Hexagon
                                     character={character}
                                     tideLevel={tideLevel} />
-                            </p>
-                        </>
-                    )
+                            </li>)
                 })
             }
+            </ol>
             {/*<Hexagon textCharacter={character} />*/}
         </>
     )

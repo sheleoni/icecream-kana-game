@@ -41,12 +41,6 @@ const Hexagon = ({ character, tideLevel}: Props) => {
 
     return (
         <article className={styles.root}>
-            =====
-            <p>
-                {character}, level: {tideLevel}
-            </p>
-            ====
-
             {/* todo: clear old code */}
             <span className={styles.hexagonWrapper}>
                 <span className={styles.letter}>

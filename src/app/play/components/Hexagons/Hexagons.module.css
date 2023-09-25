@@ -1,0 +1,24 @@
+.hexagonsContainer {
+    background-color: #87cefa;
+    width: 60vw;
+    height: 20vh;
+
+    min-height: 250px;
+    min-width: 700px;
+    /* todo: set min-width as width of 5 hexagons (maybe passing hexagon width from JS to a locally-scoped variable) */
+
+    padding-inline-start: 60px;
+    /* todo: this is to counter the (currently) unavoidable negative margin set in .hexagon */
+
+    padding-block: 30px;
+}
+
+.hexagon {
+    display: inline-block;
+    position: relative;
+    margin-inline-start: -25px; /* todo: find a way to not use negative margins (if possible). Negative margins is used here to allow hexagons to be placed closer to each other. */
+}
+
+.hexagon:nth-of-type(even) {
+    top:33%;
+}
