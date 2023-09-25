@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './Play.module.css'
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
 import Bubbles from "@/app/play/components/Bubbles/page";
@@ -34,29 +35,33 @@ const Play = () => {
         // Logged in state
         return (
             <>
-                <p>
-                    Question Filter
-                    <br />
-                    <QuestionFilter
-                        questionPool={questionPool}
-                        setQuestionPool={setQuestionPool}
-                    />
-                </p>
-                <p>
+            <p>
+                Question Filter
+                <br />
+                <QuestionFilter
+                    questionPool={questionPool}
+                    setQuestionPool={setQuestionPool}
+
+                />
+            </p>
+            <main className={styles.gameGrid}>
+                <p className={styles.QuestionWord}>
                     <QuestionWord
                         generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
                         currentQuestionLetter={currentQuestionLetter}
+
                     />
                 </p>
-                    <p>
+                <p className={styles.Bubbles}>
                     <Bubbles />
                 </p>
-                <p>
+                <p className={styles.Hexagons}>
                     <Hexagons />
                 </p>
-                <p>
+                <p className={styles.IceCreamStack}>
                     <IceCreamStack />
                 </p>
+            </main>
             </>
         )
     }

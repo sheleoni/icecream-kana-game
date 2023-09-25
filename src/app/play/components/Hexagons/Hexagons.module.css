@@ -1,7 +1,9 @@
 .hexagonsContainer {
     background-color: #87cefa;
-    width: 60vw;
-    height: 20vh;
+    width: 100%;
+    height: 100%;
+    /*width: 60vw;*/
+    /*height: 20vh;*/
 
     min-height: 250px;
     min-width: 700px;
@@ -16,7 +18,8 @@
 .hexagon {
     display: inline-block;
     position: relative;
-    margin-inline-start: -25px; /* todo: find a way to not use negative margins (if possible). Negative margins is used here to allow hexagons to be placed closer to each other. */
+    margin-inline-start: -25px;
+    /* todo: find a way to not use negative margins (if possible). Negative margins is used here to allow hexagons to be placed closer to each other. */
 }
 
 .hexagon:nth-of-type(even) {

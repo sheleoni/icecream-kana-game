@@ -1,0 +1,35 @@
+.gameGrid {
+    text-align: center;
+    width: 90vw;
+    aspect-ratio: 16/9;
+    display: grid;
+    grid-template-areas:
+            "icecream question bubbles"
+            "icecream hexagons hexagons";
+    gap: 10px;
+    grid-template-columns: 20% 30% 50%;
+    grid-template-rows: 55% 45%;
+    outline: 2px solid red;
+    min-width: 1000px;
+}
+
+.QuestionFilter {
+/* not part of the grid */
+}
+
+.QuestionWord {
+    grid-area: question;
+}
+
+.Bubbles {
+    grid-area: bubbles;
+}
+
+.Hexagons {
+    grid-area: hexagons;
+}
+
+.IceCreamStack {
+    grid-area: icecream;
+    background-color: #9a0f0f;
+}
