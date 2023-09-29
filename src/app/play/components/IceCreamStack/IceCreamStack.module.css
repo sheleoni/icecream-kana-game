@@ -1,0 +1,42 @@
+.iceCreamContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    /* make enclosed stacking context for ice cream scoops */
+    isolation: isolate;
+    list-style: none;
+}
+
+.iceCreamCone {
+    width: 68%;
+    margin-top: -30%;
+    z-index: 0;
+}
+
+.iceCreamScoopButton {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.iceCreamScoop {
+    width: 85%;
+    margin-top: -32%;
+}
+
+.iceCreamHoverPanel {
+    background-color: black;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.scoreContainer {
+
+    max-width: 100%;
+    /* specify container height to allow ice cream to shrink inside the container*/
+    grid-area: score;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    overflow: scroll;
+
+}

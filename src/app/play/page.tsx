@@ -4,7 +4,7 @@ import styles from './Play.module.css'
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
 import Bubbles from "@/app/play/components/Bubbles/page";
-import IceCreamStack from "@/app/play/components/IceCreamStack";
+import IceCreamStack from "@/app/play/components/IceCreamStack/page";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
