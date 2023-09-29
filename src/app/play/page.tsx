@@ -53,7 +53,7 @@ const Play = () => {
                     />
                 </p>
                 <p className={styles.Bubbles}>
-                    <Bubbles />
+                    <Bubbles currentQuestionLetter={currentQuestionLetter} />
                 </p>
                 <p className={styles.Hexagons}>
                     <Hexagons />
