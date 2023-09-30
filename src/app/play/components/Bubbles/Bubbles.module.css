@@ -91,14 +91,14 @@
 
 /* Letters in bubbles */
 .choiceLetter {
-    min-width: 5rem; /* min-width is set so that choices with extreme length (1/ 3 characters) like "i", "tsu" can be centered with text-align */
     text-align: center;
-    left: 18%;
+    left: 28%;
     top: 20%;
     position: absolute;
     font-family: 'Zen Maru Gothic', sans-serif;
     font-weight: 900;
-    font-size: 3.6rem;
+    font-size: 4vw;
+    min-width: 6vw; /* min-width is set so that choices with extreme length (1/ 3 characters) like "i", "tsu" can be centered with text-align */
     height: fit-content;
 }
 

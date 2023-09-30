@@ -1,4 +1,4 @@
-const rowRomajiChoices = {
+const rowRomaji = {
     'あ行': ['a', 'i', 'u', 'e', 'o'],
     'か行': ['ka', 'ki', 'ku', 'ke', 'ko'],
     'が行': ['ga', 'gi', 'gu', 'ge', 'go'],
@@ -31,4 +31,4 @@ const rowRomajiChoices = {
     'ワ行': ['wa', 'wo', 'n'],
 };
 
-export default rowRomajiChoices;
+export default rowRomaji;

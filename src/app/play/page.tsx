@@ -3,7 +3,7 @@
 import styles from './Play.module.css'
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
-import Bubbles from "@/app/play/components/Bubbles/page";
+import Bubbles from "@/app/play/components/Bubbles/Bubbles";
 import IceCreamStack from "@/app/play/components/IceCreamStack/page";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
@@ -12,7 +12,7 @@ import React, {useState} from "react";
 import Hexagons from "@/app/play/components/Hexagons/page";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
-    const [currentQuestionLetter, setCurrentQuestionLetter] = React.useState< string | null>(null);
+    const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
 
     /* Picking a random character from the question pool START */
@@ -53,7 +53,7 @@ const Play = () => {
                     />
                 </p>
                 <p className={styles.Bubbles}>
-                    <Bubbles />
+                    <Bubbles currentQuestionLetter={currentQuestionLetter} />
                 </p>
                 <p className={styles.Hexagons}>
                     <Hexagons />
