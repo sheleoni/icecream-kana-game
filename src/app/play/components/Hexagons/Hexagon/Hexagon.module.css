@@ -3,7 +3,7 @@
 
 
 .root {
-    --hexagon-width: 150px;
+    --hexagon-width: 180px;
     --hexagon-height: var(--hexagon-width);
 }
 
@@ -33,10 +33,10 @@
 
 .letter {
     font-family: 'Zen Maru Gothic', sans-serif;
-    font-size: 60px;
+    font-size: 70px;
     position: absolute;
     color: black;
-    top: 20%;
+    top: 23%;
     left: 30%;
     z-index: 3;
 }

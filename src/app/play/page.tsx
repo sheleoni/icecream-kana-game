@@ -4,7 +4,7 @@ import styles from './Play.module.css'
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
 import Bubbles from "@/app/play/components/Bubbles/Bubbles";
-import IceCreamStack from "@/app/play/components/IceCreamStack/page";
+import IceCreamStack from "@/app/play/components/IceCreamStack/IceCreamStack";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
@@ -14,7 +14,7 @@ const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
-
+    const [ score, setScore ] = useState<number>(0); // todo: not sure if initial score = 0 while GETting data from DB is a good idea. Reconsider this at a later stage.
     /* Picking a random character from the question pool START */
     const generateQuestion = (): string => {
         const randomIndex = Math.floor(Math.random() * questionPool.length);
@@ -49,17 +49,21 @@ const Play = () => {
                     <QuestionWord
                         generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
                         currentQuestionLetter={currentQuestionLetter}
-
                     />
                 </p>
                 <p className={styles.Bubbles}>
-                    <Bubbles currentQuestionLetter={currentQuestionLetter} />
+                    <Bubbles
+                        currentQuestionLetter={currentQuestionLetter}
+                        score={score}
+                        setScore={setScore}
+                        generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
+                    />
                 </p>
                 <p className={styles.Hexagons}>
                     <Hexagons />
                 </p>
                 <p className={styles.IceCreamStack}>
-                    <IceCreamStack />
+                    <IceCreamStack score={score} />
                 </p>
             </main>
             </>
