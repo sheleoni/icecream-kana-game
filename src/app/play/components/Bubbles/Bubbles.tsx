@@ -8,7 +8,7 @@ import rowRomaji from "@/app/play/components/Bubbles/rowRomaji"; // 'あ行': ['
 type Props = {
     currentQuestionLetter: string,
 }
-const Bubbles = ({ currentQuestionLetter }: Props) => {
+function Bubbles ({ currentQuestionLetter = 'あ' }: Props) {
     // const tempChoiceArray = ['a', 'i', 'u', 'e', 'o'];
 
     const findRowByKana = (kana: string, rowKana: {[key: string]: string[]}): string | null => {
