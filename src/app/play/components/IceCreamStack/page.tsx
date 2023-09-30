@@ -3,12 +3,8 @@
 import * as Tooltip from "@radix-ui/react-tooltip";
 import styles from "./IceCreamStack.module.css";
 const IceCreamStack = () => {
-    let totalScore = 10;
-    // for (const key in score) {
-    //     totalScore += score[key];
-    // }
-
-    const iceCreamScoops = [ // todo: change temporary icecream scoops array to prop from parent component (and probably inject initial data from DB)
+    const iceCreamScoops = [
+        // todo: change temporary icecream scoops array to prop from parent component (and probably inject initial data from DB)
         {
             name: "うなぎ",
             imgURL: "https://res.cloudinary.com/dd1dw34dc/image/upload/v1684249747/hiragana_game/icecream_scoops/%E3%81%86%E3%81%AA%E3%81%8D%E3%82%99_hejix5.png"
@@ -16,13 +12,18 @@ const IceCreamStack = () => {
         {
             name: "ぶどう（葡萄）",
             imgURL: "https://res.cloudinary.com/dd1dw34dc/image/upload/v1687530773/hiragana_game/icecream_scoops/%E3%81%B5%E3%82%99%E3%81%A8%E3%82%99%E3%81%86_mwrc42.png"
+        },        {
+            name: "ぶどう（葡萄）",
+            imgURL: "https://res.cloudinary.com/dd1dw34dc/image/upload/v1687530773/hiragana_game/icecream_scoops/%E3%81%B5%E3%82%99%E3%81%A8%E3%82%99%E3%81%86_mwrc42.png"
+        },        {
+            name: "ぶどう（葡萄）",
+            imgURL: "https://res.cloudinary.com/dd1dw34dc/image/upload/v1687530773/hiragana_game/icecream_scoops/%E3%81%B5%E3%82%99%E3%81%A8%E3%82%99%E3%81%86_mwrc42.png"
         },
     ]
 
     return (
-        <aside className={styles.scoreContainer}>hi
-        <p style={{marginBlockEnd: 50}}>Your score is:{' '}{totalScore}</p>
-        <ul className={styles.iceCreamContainer}>
+        <aside className={styles.scoreContainer}>
+        <ul className={styles.iceCreamContainer} style={{marginBlockStart: 150}}>
             <li>
                 <Tooltip.Provider delayDuration={1500}>
                     <Tooltip.Root>

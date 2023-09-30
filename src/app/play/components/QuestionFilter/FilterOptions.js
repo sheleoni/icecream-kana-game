@@ -10,12 +10,12 @@ export const FilterOptions = {
         'ま': false,
         'や': false,
         'ら': false,
-        'わ': false,
         'が': false,
         'ざ': false,
         'だ': false,
         'ば': false,
-        'ぱ': false
+        'ぱ': false,
+        'わ': false,
     },
     katakana: {
         'ア': false,
@@ -27,12 +27,12 @@ export const FilterOptions = {
         'マ': false,
         'ヤ': false,
         'ラ': false,
-        'ワ': false,
         'ガ': false,
         'ザ': false,
         'ダ': false,
         'バ': false,
-        'パ': false
+        'パ': false,
+        'ワ': false,
     }
 }
 

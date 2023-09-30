@@ -19,6 +19,10 @@
 
 .QuestionWord {
     grid-area: question;
+    background-color: #E46253;
+    border-radius: 5px;
+    font-weight: 700;
+    -webkit-text-stroke: 8px black;
 }
 
 .Bubbles {
@@ -27,9 +31,13 @@
 
 .Hexagons {
     grid-area: hexagons;
+    background-color: #87cefa;
+    border-radius: 5px;
 }
 
 .IceCreamStack {
     grid-area: icecream;
-    background-color: #9a0f0f;
+    overflow: scroll;
+    border-radius: 5px;
+    background-color: #E9BD4A;
 }
