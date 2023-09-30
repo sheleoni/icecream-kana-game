@@ -1,3 +1,16 @@
+.scoreNumber {
+    background-color: #c4941c;
+    /*margin: 3px;*/
+    width: 100%;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    text-transform: capitalize;
+    font-size: 2rem;
+    padding-block: 10px;
+    position: sticky; /* todo: make score sticky on iceCreamStack area when scrolling down the icecream*/
+    top: 0;
+    cursor: default;
+}
+
 .iceCreamContainer {
     display: flex;
     flex-direction: column-reverse;

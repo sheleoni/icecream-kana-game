@@ -2,7 +2,11 @@
 
 import * as Tooltip from "@radix-ui/react-tooltip";
 import styles from "./IceCreamStack.module.css";
-const IceCreamStack = () => {
+
+type Props = {
+    score: number,
+}
+const IceCreamStack = ({ score }: Props) => {
     const iceCreamScoops = [
         // todo: change temporary icecream scoops array to prop from parent component (and probably inject initial data from DB)
         {
@@ -23,6 +27,9 @@ const IceCreamStack = () => {
 
     return (
         <aside className={styles.scoreContainer}>
+        <p className={styles.scoreNumber}>
+            Your score: {score}
+        </p>
         <ul className={styles.iceCreamContainer} style={{marginBlockStart: 150}}>
             <li>
                 <Tooltip.Provider delayDuration={1500}>

@@ -4,13 +4,12 @@ import styles from './Play.module.css'
 import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
 import Bubbles from "@/app/play/components/Bubbles/Bubbles";
-import IceCreamStack from "@/app/play/components/IceCreamStack/page";
+import IceCreamStack from "@/app/play/components/IceCreamStack/IceCreamStack";
 import characterList from "@/letterData/characterList";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
 import React, {useState} from "react";
 import Hexagons from "@/app/play/components/Hexagons/page";
-import Score from "@/app/play/components/Score/Score";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
@@ -45,9 +44,6 @@ const Play = () => {
 
                 />
             </p>
-            <center>
-                <Score score={score} />
-            </center>
             <main className={styles.gameGrid}>
                 <p className={styles.QuestionWord}>
                     <QuestionWord
@@ -67,7 +63,7 @@ const Play = () => {
                     <Hexagons />
                 </p>
                 <p className={styles.IceCreamStack}>
-                    <IceCreamStack />
+                    <IceCreamStack score={score} />
                 </p>
             </main>
             </>
