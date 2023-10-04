@@ -12,7 +12,7 @@ type Props = {
     setScore: React.Dispatch<React.SetStateAction<number>>,
     score: number,
     generateQuestion: () => void,
-    tideLevel: TideLevel,
+    tideLevel: object,
     setTideLevel: React.Dispatch<React.SetStateAction<object>>
 }
 

@@ -9,7 +9,7 @@ import initialTideLevel from "@/app/play/data/tideLevel";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
 import React, {useState} from "react";
-import Hexagons from "@/app/play/components/Hexagons/page";
+import Hexagons from "@/app/play/components/Hexagons/Hexagons";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');

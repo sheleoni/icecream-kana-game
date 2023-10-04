@@ -1,4 +1,4 @@
-import Hexagon from "@/app/play/components/Hexagons/Hexagon/page";
+import Hexagon from "@/app/play/components/Hexagons/Hexagon/Hexagon";
 import styles from './Hexagons.module.css';
 import rowKana from "@/app/play/data/rowKana";
 import React from "react";
