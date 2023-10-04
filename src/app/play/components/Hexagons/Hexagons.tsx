@@ -3,7 +3,6 @@ import styles from './Hexagons.module.css';
 import rowKana from "@/app/play/data/rowKana";
 import React from "react";
 import iceCreamPool from "@/app/play/data/iceCreamPool";
-import {patchConsoleError} from "next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info";
 
 type IceCreamScoop = {
     name: string;
@@ -53,6 +52,15 @@ const Hexagons = ({ currentQuestionLetter, tideLevel, setTideLevel, iceCreamStac
 
     const pickIceCreamByCharacter = (character: string) => {
         const possibleIceCreamScoops = iceCreamPool[character as keyof typeof iceCreamPool];
+        if (!possibleIceCreamScoops) {
+            // choose a random ice cream from placeholders if specific ice cream is not ready
+            const randomIndex = Math.floor(Math.random() * (iceCreamPool.placeholder.length));
+            const randomIceCreamScoop = iceCreamPool.placeholder[randomIndex];
+            const nextIceCreamStack: IceCreamScoop[] = [...iceCreamStack];
+            nextIceCreamStack.push(randomIceCreamScoop);
+            setIceCreamStack(nextIceCreamStack);
+            return;
+        }
         const randomIndex = Math.floor(Math.random() * (possibleIceCreamScoops.length));
         const randomIceCreamScoop = possibleIceCreamScoops[randomIndex];
         const nextIceCreamStack: IceCreamScoop[] = [...iceCreamStack];

@@ -66,7 +66,7 @@ const IceCreamStack = ({ score, iceCreamStack }: Props) => {
                                     <Tooltip.Trigger asChild>
                                         {/*image of scoop*/}
                                         {/*TODO: confirm if <button> tag is recommended over <img> tag in radix*/}
-                                        <img className={styles.iceCreamScoop} alt={`${icecream.name}`}
+                                        <img className={styles.iceCreamScoop} alt={icecream.name}
                                              src={icecream.imgURL}/>
                                     </Tooltip.Trigger>
                                     <Tooltip.Portal>
