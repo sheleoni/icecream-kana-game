@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./Bubbles.module.css"
-import rowKana from "@/app/play/components/Bubbles/rowKana"; // 'あ行': ['あ', 'い', 'う', 'え', 'お'],
+import rowKana from "@/app/play/data/rowKana";
 import rowRomaji from "@/app/play/components/Bubbles/rowRomaji";
 import kanaRomaji from "@/app/play/components/Bubbles/kanaRomaji";
 import React from "react"; // 'あ行': ['a', 'i', 'u', 'e', 'o'],
@@ -12,8 +12,22 @@ type Props = {
     setScore: React.Dispatch<React.SetStateAction<number>>,
     score: number,
     generateQuestion: () => void,
+    tideLevel: object,
+    setTideLevel: React.Dispatch<React.SetStateAction<object>>
 }
-function Bubbles ({ currentQuestionLetter = 'あ', setScore, score, generateQuestion }: Props) {
+
+type TideLevel = {
+    [key: string]: number,
+}
+
+function Bubbles ({
+    currentQuestionLetter = 'あ',
+    setScore,
+    score,
+    generateQuestion,
+    tideLevel,
+    setTideLevel
+    }: Props) {
     // const tempChoiceArray = ['a', 'i', 'u', 'e', 'o'];
 
     const findRowByKana = (kana: string, rowKana: {[key: string]: string[]}): string | null => {
@@ -32,18 +46,28 @@ function Bubbles ({ currentQuestionLetter = 'あ', setScore, score, generateQues
         return null;  // or throw an error, or return a default value, etc.
     }
     const currentQuestionRow = `${findRowByKana(currentQuestionLetter, rowKana)}`;
-    const tempChoiceArray = rowRomaji[currentQuestionRow as keyof typeof rowRomaji];
+    const choiceArray = rowRomaji[currentQuestionRow as keyof typeof rowRomaji];
     const romajiAnswer = kanaRomaji[currentQuestionLetter as keyof typeof kanaRomaji];
 
-    const handleClickBubble = (choice: string, romajiAnswer: string, score: number) => {
+    const bubbleChoicesKana = rowKana[currentQuestionRow as keyof typeof rowKana];
+    console.log(bubbleChoicesKana, 'bubbleChoicesKana')
+
+    console.log(tideLevel, 'tide level in bubbles')
+    const handleClickBubble = (choice: string, romajiAnswer: string, kanaAnswer: string, score: number) => {
         if (isCorrectAnswer(choice, romajiAnswer, score)) {
+            // go to next question on correct answer
             generateQuestion()
-        };
+            const currentTideLevel = tideLevel[kanaAnswer as keyof typeof tideLevel];
+            // add one to tide level (if tide level is not already at its max, 5)
+            if (currentTideLevel < 5) {
+                const nextTideLevel: TideLevel = { ...tideLevel };
+                nextTideLevel[kanaAnswer] += 1;
+                setTideLevel(nextTideLevel);
+            }
+        }
 
     }
     const isCorrectAnswer = (choice: string, romajiAnswer: string, score: number) => {
-            console.log('correct!')
-            console.log(romajiAnswer)
         if (choice === romajiAnswer) {
             setScore(() => (score + 1));
             return true;
@@ -55,10 +79,12 @@ function Bubbles ({ currentQuestionLetter = 'あ', setScore, score, generateQues
         <>
             <aside className={styles.bubbleAreaContainer}>
                 <ol>
-                { tempChoiceArray?.map((choice) => {
+                { choiceArray?.map((choice, index: number) => {
+                    const kanaAnswer = rowKana[currentQuestionRow as keyof typeof rowKana][index];
                     return (
-                        <li key={choice} className={styles.bubbleContainer} onClick={() => handleClickBubble(choice, romajiAnswer, score)}
+                        <li key={choice} className={styles.bubbleContainer} onClick={() => handleClickBubble(choice, romajiAnswer, kanaAnswer, score)}
                         >
+                        {/*    todo: use rowKana.js to pass Kana to handleClickBubble for checking answer (romaji is not enough) */}
                         {/*  todo: consider getting length of choice (e.g. 'i' = 1; 'tsu' = 3 and adjust size with different CSS classes  */}
                         <Image
                              src="https://res.cloudinary.com/dd1dw34dc/image/upload/v1676767326/hiragana_game/Bubble_background_opudxy.gif"
@@ -69,6 +95,7 @@ function Bubbles ({ currentQuestionLetter = 'あ', setScore, score, generateQues
                         />
                             <span className={styles.choiceLetter}>
                                 {choice}
+                                {/*{kanaAnswer}*/}
                             </span>
                         </li>
                     )

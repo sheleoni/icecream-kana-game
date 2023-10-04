@@ -5,16 +5,17 @@ import QuestionWord from "@/app/play/components/QuestionWord/QuestionWord";
 import QuestionFilter from "@/app/play/components/QuestionFilter/QuestionFilter";
 import Bubbles from "@/app/play/components/Bubbles/Bubbles";
 import IceCreamStack from "@/app/play/components/IceCreamStack/IceCreamStack";
-import characterList from "@/letterData/characterList";
+import initialTideLevel from "@/app/play/data/tideLevel";
 import {useSession} from "next-auth/react";
 import Link from 'next/link';
 import React, {useState} from "react";
-import Hexagons from "@/app/play/components/Hexagons/page";
+import Hexagons from "@/app/play/components/Hexagons/Hexagons";
 const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
     const [ score, setScore ] = useState<number>(0); // todo: not sure if initial score = 0 while GETting data from DB is a good idea. Reconsider this at a later stage.
+    const [ tideLevel, setTideLevel ] = useState<object>(initialTideLevel);
     /* Picking a random character from the question pool START */
     const generateQuestion = (): string => {
         const randomIndex = Math.floor(Math.random() * questionPool.length);
@@ -53,6 +54,8 @@ const Play = () => {
                 </p>
                 <p className={styles.Bubbles}>
                     <Bubbles
+                        tideLevel={tideLevel}
+                        setTideLevel={setTideLevel}
                         currentQuestionLetter={currentQuestionLetter}
                         score={score}
                         setScore={setScore}
@@ -60,7 +63,10 @@ const Play = () => {
                     />
                 </p>
                 <p className={styles.Hexagons}>
-                    <Hexagons />
+                    <Hexagons
+                        tideLevel={tideLevel}
+                        setTideLevel={setTideLevel}
+                        currentQuestionLetter={currentQuestionLetter} />
                 </p>
                 <p className={styles.IceCreamStack}>
                     <IceCreamStack score={score} />
