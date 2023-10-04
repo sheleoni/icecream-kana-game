@@ -76,7 +76,6 @@ const Hexagons = ({ currentQuestionLetter, tideLevel, setTideLevel, iceCreamStac
                                     character={character}
                                     tideLevel={tideLevel[character as keyof typeof tideLevel]}
                                 />
-                                tideLevel: {tideLevel[character as keyof typeof tideLevel]}
                             </li>)
                 })
             }
