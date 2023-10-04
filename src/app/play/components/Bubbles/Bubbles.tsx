@@ -50,9 +50,7 @@ function Bubbles ({
     const romajiAnswer = kanaRomaji[currentQuestionLetter as keyof typeof kanaRomaji];
 
     const bubbleChoicesKana = rowKana[currentQuestionRow as keyof typeof rowKana];
-    console.log(bubbleChoicesKana, 'bubbleChoicesKana')
 
-    console.log(tideLevel, 'tide level in bubbles')
     const handleClickBubble = (choice: string, romajiAnswer: string, kanaAnswer: string, score: number) => {
         if (isCorrectAnswer(choice, romajiAnswer, score)) {
             // go to next question on correct answer

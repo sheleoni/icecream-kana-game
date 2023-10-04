@@ -1,5 +1,5 @@
 // ice-cream options divided by character
-const iceCreamByKana = {
+const iceCreamPool = {
     'あ': [
         {
             name: "飴",
@@ -250,4 +250,4 @@ const iceCreamByKana = {
 
 }
 
-export default iceCreamByKana;
+export default iceCreamPool;

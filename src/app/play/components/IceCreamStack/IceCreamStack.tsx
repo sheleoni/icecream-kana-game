@@ -3,10 +3,16 @@
 import * as Tooltip from "@radix-ui/react-tooltip";
 import styles from "./IceCreamStack.module.css";
 
+type IceCreamScoop = {
+    name: string;
+    imgURL: string;
+}
+
 type Props = {
     score: number,
+    iceCreamStack: IceCreamScoop[],
 }
-const IceCreamStack = ({ score }: Props) => {
+const IceCreamStack = ({ score, iceCreamStack }: Props) => {
     const iceCreamScoops = [
         // todo: change temporary icecream scoops array to prop from parent component (and probably inject initial data from DB)
         {
@@ -51,7 +57,7 @@ const IceCreamStack = ({ score }: Props) => {
                 </Tooltip.Provider>
 
             </li>
-            {iceCreamScoops?.map((icecream, index) => {
+            {iceCreamStack?.map((icecream, index) => {
                 return (
                     <>
                         <li key={index} className={styles.iceCreamListContainer} style={{zIndex: index + 1}}>
@@ -60,7 +66,7 @@ const IceCreamStack = ({ score }: Props) => {
                                     <Tooltip.Trigger asChild>
                                         {/*image of scoop*/}
                                         {/*TODO: confirm if <button> tag is recommended over <img> tag in radix*/}
-                                        <img className={styles.iceCreamScoop} alt={`${icecream.name}`}
+                                        <img className={styles.iceCreamScoop} alt={icecream.name}
                                              src={icecream.imgURL}/>
                                     </Tooltip.Trigger>
                                     <Tooltip.Portal>
