@@ -65,6 +65,7 @@ const Play = () => {
                 <p className={styles.Hexagons}>
                     <Hexagons
                         tideLevel={tideLevel}
+                        setTideLevel={setTideLevel}
                         currentQuestionLetter={currentQuestionLetter} />
                 </p>
                 <p className={styles.IceCreamStack}>

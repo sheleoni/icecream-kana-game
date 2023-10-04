@@ -46,7 +46,7 @@ function Bubbles ({
         return null;  // or throw an error, or return a default value, etc.
     }
     const currentQuestionRow = `${findRowByKana(currentQuestionLetter, rowKana)}`;
-    const tempChoiceArray = rowRomaji[currentQuestionRow as keyof typeof rowRomaji];
+    const choiceArray = rowRomaji[currentQuestionRow as keyof typeof rowRomaji];
     const romajiAnswer = kanaRomaji[currentQuestionLetter as keyof typeof kanaRomaji];
 
     const bubbleChoicesKana = rowKana[currentQuestionRow as keyof typeof rowKana];
@@ -59,7 +59,6 @@ function Bubbles ({
             generateQuestion()
             const currentTideLevel = tideLevel[kanaAnswer as keyof typeof tideLevel];
             // add one to tide level (if tide level is not already at its max, 5)
-            // console.log(tideLevel[kanaAnswer], `correct answer, tide level of ${choice}`)
             if (currentTideLevel < 5) {
                 const nextTideLevel: TideLevel = { ...tideLevel };
                 nextTideLevel[kanaAnswer] += 1;
@@ -80,7 +79,7 @@ function Bubbles ({
         <>
             <aside className={styles.bubbleAreaContainer}>
                 <ol>
-                { tempChoiceArray?.map((choice, index: number) => {
+                { choiceArray?.map((choice, index: number) => {
                     const kanaAnswer = rowKana[currentQuestionRow as keyof typeof rowKana][index];
                     return (
                         <li key={choice} className={styles.bubbleContainer} onClick={() => handleClickBubble(choice, romajiAnswer, kanaAnswer, score)}
