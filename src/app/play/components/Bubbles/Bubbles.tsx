@@ -9,8 +9,8 @@ import React from "react"; // 'あ行': ['a', 'i', 'u', 'e', 'o'],
 
 type Props = {
     currentQuestionLetter: string,
-    setScore: React.Dispatch<React.SetStateAction<number>>,
-    score: number,
+    setKanaScore: React.Dispatch<React.SetStateAction<object>>,
+    kanaScore: object,
     generateQuestion: () => void,
     tideLevel: object,
     setTideLevel: React.Dispatch<React.SetStateAction<object>>
@@ -22,8 +22,8 @@ type TideLevel = {
 
 function Bubbles ({
     currentQuestionLetter = 'あ',
-    setScore,
-    score,
+    setKanaScore,
+    kanaScore,
     generateQuestion,
     tideLevel,
     setTideLevel
@@ -51,26 +51,28 @@ function Bubbles ({
 
     const bubbleChoicesKana = rowKana[currentQuestionRow as keyof typeof rowKana];
 
-    const handleClickBubble = (choice: string, romajiAnswer: string, kanaAnswer: string, score: number) => {
-        if (isCorrectAnswer(choice, romajiAnswer, score)) {
+    const handleClickBubble = (choice: string, romajiAnswer: string, kanaAnswer: string, kanaScore: object, currentQuestionLetter: string, setKanaScore: React.Dispatch<React.SetStateAction<object>>) => {
+        if (isCorrectAnswer(choice, romajiAnswer, kanaScore, kanaAnswer)) {
+            // increase score
+            const nextKanaScore = { ... kanaScore };
+            (nextKanaScore as {[key: string]: number})[currentQuestionLetter] += 1;
+            setKanaScore(nextKanaScore);
             // go to next question on correct answer
             generateQuestion()
-            const currentTideLevel = tideLevel[kanaAnswer as keyof typeof tideLevel];
+
             // add one to tide level (if tide level is not already at its max, 5)
+            const currentTideLevel = tideLevel[kanaAnswer as keyof typeof tideLevel];
             if (currentTideLevel < 5) {
                 const nextTideLevel: TideLevel = { ...tideLevel };
                 nextTideLevel[kanaAnswer] += 1;
                 setTideLevel(nextTideLevel);
             }
         }
-
     }
-    const isCorrectAnswer = (choice: string, romajiAnswer: string, score: number) => {
-        if (choice === romajiAnswer) {
-            setScore(() => (score + 1));
-            return true;
-        }
-        return false;
+    const isCorrectAnswer = (choice: string, romajiAnswer: string, kanaScore: object, kanaAnswer: string) => {
+        console.log(choice, 'CHOICEEE')
+        console.log(kanaAnswer, 'KANA ANS') // user's choice bubble in kana (a → あ)
+        return choice === romajiAnswer;
     }
 
     return (
@@ -80,7 +82,7 @@ function Bubbles ({
                 { choiceArray?.map((choice, index: number) => {
                     const kanaAnswer = rowKana[currentQuestionRow as keyof typeof rowKana][index];
                     return (
-                        <li key={choice} className={styles.bubbleContainer} onClick={() => handleClickBubble(choice, romajiAnswer, kanaAnswer, score)}
+                        <li key={choice} className={styles.bubbleContainer} onClick={() => handleClickBubble(choice, romajiAnswer, kanaAnswer, kanaScore, currentQuestionLetter, setKanaScore)}
                         >
                         {/*    todo: use rowKana.js to pass Kana to handleClickBubble for checking answer (romaji is not enough) */}
                         {/*  todo: consider getting length of choice (e.g. 'i' = 1; 'tsu' = 3 and adjust size with different CSS classes  */}
