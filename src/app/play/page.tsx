@@ -10,6 +10,7 @@ import {useSession} from "next-auth/react";
 import Link from 'next/link';
 import React, {useState} from "react";
 import Hexagons from "@/app/play/components/Hexagons/Hexagons";
+import scoreByKana from "@/app/play/data/scoreByKana";
 
 type IceCreamScoop = {
     name: string;
@@ -19,10 +20,18 @@ const Play = () => {
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
-    const [ score, setScore ] = useState<number>(0); // todo: not sure if initial score = 0 while GETting data from DB is a good idea. Reconsider this at a later stage.
+    const [ kanaScore, setKanaScore ] = useState<object>(scoreByKana);
     const [ tideLevel, setTideLevel ] = useState<object>(initialTideLevel);
     const [ iceCreamStack, setIceCreamStack ] = useState<IceCreamScoop[]>([]);
     /* Picking a random character from the question pool START */
+    const getTotalScore = (kanaScore: object) => {
+        let totalScore = 0;
+        Object.values(kanaScore).forEach((characterScore) => {
+        totalScore += characterScore});
+        return totalScore;
+    }
+    const totalScore = getTotalScore(kanaScore);
+
     const generateQuestion = (): string => {
         const randomIndex = Math.floor(Math.random() * questionPool.length);
         return questionPool[randomIndex]
@@ -36,7 +45,6 @@ const Play = () => {
             setCurrentQuestionLetter(currentQuestionLetter);
         }
     }, [questionPool])
-    /* Picking a random character from the question pool END */
 
     if (session && session.user) {
         // Logged in state
@@ -63,8 +71,8 @@ const Play = () => {
                         tideLevel={tideLevel}
                         setTideLevel={setTideLevel}
                         currentQuestionLetter={currentQuestionLetter}
-                        score={score}
-                        setScore={setScore}
+                        kanaScore={kanaScore}
+                        setKanaScore={setKanaScore}
                         generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
                     />
                 </p>
@@ -79,7 +87,7 @@ const Play = () => {
                 <p className={styles.IceCreamStack}>
                     <IceCreamStack
                         iceCreamStack={iceCreamStack}
-                        score={score} />
+                        score={totalScore} />
                 </p>
             </main>
             </>
