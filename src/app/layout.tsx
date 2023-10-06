@@ -1,10 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import {ZenMaruGothic} from "@/app/fonts";
 import UserProvider from "@/components/UserProvider";
 import MenuBar from "@/components/MenuBar";
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Icecream Kana Game',
@@ -18,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={ZenMaruGothic.className}>
         <UserProvider>
           <MenuBar />
           {children}

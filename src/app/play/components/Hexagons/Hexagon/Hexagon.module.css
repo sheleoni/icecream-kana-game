@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
 
-
-
 .root {
     --hexagon-width: 180px;
     --hexagon-height: var(--hexagon-width);
 }
-
 
 .activeHexagon {
     z-index: 3;
@@ -32,7 +29,6 @@
 }
 
 .letter {
-    font-family: 'Zen Maru Gothic', sans-serif;
     font-size: 70px;
     position: absolute;
     color: black;
