@@ -15,7 +15,6 @@
     cursor: pointer;
     margin-block: 0;
     font-size: 18vw;
-    font-family: 'Zen Maru Gothic', sans-serif;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
