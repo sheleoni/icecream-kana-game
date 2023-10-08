@@ -1,0 +1,34 @@
+.worksheetContainer {
+    display: flex;
+    gap: 22px;
+    place-items: center;
+    place-content: center;
+    list-style: none;
+}
+
+.worksheetItem {
+    text-align: center;
+    background-color: rgba(72, 66, 63, 0.76);
+    border-radius: 8px;
+    padding-inline: 15px;
+    padding-block-end: 15px;
+    margin-block: 10px;
+}
+
+.worksheetItem:hover {
+    background-color: rgba(239, 221, 161, 0.4);
+}
+
+.worksheetItem h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding-block: 20px;
+    line-height: 1;
+}
+
+.worksheet {
+    width: 45vw;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}

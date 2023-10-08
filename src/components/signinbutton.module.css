@@ -1,6 +1,20 @@
+.greetingContainer {
+    display: flex;
+    place-items: center;
+    gap: 10px;
+}
+
+.greeting {
+    max-width: 15vw;
+}
+
 .signInButton {
-    font-size: 3rem;
+    font-size: 1.8rem;
     background-color: orange;
+    font-family: unset;
+    padding: 5px;
+    border-radius: 5px;
+    border: 3px solid black;
 }
 
 .signIn {

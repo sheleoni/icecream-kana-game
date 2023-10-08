@@ -6,15 +6,17 @@ import styles from './signinbutton.module.css';
 function SignInButton() {
     const { data: session } = useSession(); // useSession is a client component
 
-
     // signed-in state
     if (session && session.user) {
+        const userFirstName = session.user.name?.split(" ")[0];
         return (
         <>
-            <p> Hello { session.user.name }</p>
+            <p className={styles.greetingContainer}>
+            <p className={styles.greeting}> Hi { userFirstName }</p>
             <button className={styles.signInButton} onClick={() => signOut()}>
-                Sign Out~
+                Sign Out
             </button>
+            </p>
         </>
         )
     }
