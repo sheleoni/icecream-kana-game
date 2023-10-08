@@ -25,6 +25,9 @@
     padding: 5px;
     margin: 8px;
     display: block;
+    font-size: 1.5rem;
+    padding-inline: 10px;
+    font-weight: 600;
 }
 
 .menuLink:hover {

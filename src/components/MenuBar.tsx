@@ -31,6 +31,11 @@ const MenuBar = () => {
                     /Collection (private)
                 </Link>
             </li>
+            <li>
+                <Link href={'/worksheets'} className={styles.menuLink}>
+                    /Worksheets
+                </Link>
+            </li>
         </ul>
         </header>
     </React.Fragment>
