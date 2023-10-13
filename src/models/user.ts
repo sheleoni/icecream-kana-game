@@ -1,4 +1,5 @@
 import { Schema, model, models } from 'mongoose';
+import {userIceCreamStackSchema} from "@/models/userIceCreamStack";
 
 const UserSchema = new Schema({
     email: {
@@ -13,6 +14,7 @@ const UserSchema = new Schema({
     avatar: {
         type: String,
     },
+    iceCreamStack: [userIceCreamStackSchema],
     unlockedIceCreams: [
         {
             iceCream: {

@@ -1,5 +1,8 @@
 import { Schema, model, models } from 'mongoose';
 
+// This file defines the schema for all the available icecream
+// todo: refactor and maybe delete this file since the icecream selection may be stored as a frontend JS file instead of a database collection
+
 const IceCreamSchema = new Schema({
     id: {
         type: String,

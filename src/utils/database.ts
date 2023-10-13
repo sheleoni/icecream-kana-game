@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 import IceCream from "@/models/iceCream";
 import User from "@/models/user";
+import {addInitialFlavors, addInitialIceCreamStack, initialIceCreamStack} from "@/utils/injectSeedData";
 export const connectDB = async () => {
     try {
         await mongoose.connect(process.env.DB_CONNECTION_STRING!, {
@@ -11,29 +12,15 @@ export const connectDB = async () => {
         });
         console.log("connected to MongoDB!");
         // await addInitialFlavors();
-        // await updateAllUsers();
+        await addInitialIceCreamStack(); // todo: comment this line out and see if it works fine without this function
+        // todo: addInitialTideLevel too, and use updateAllUsers to update the user schema to inject that seed data
+        // todo: fix bug where ice cream stack seed data has not been added
+        await updateAllUsers(); // update all user data upon login (connectDB) when needed
     } catch (error) {
         console.log(error);
     }
 };
 
-const addInitialFlavors = async () => {
-    const initialFlavors = [
-        { id: '1', name: 'Vanilla', imageURL: 'vanilla.png'},
-        { id: '2', name: 'Chocolate', imageURL: 'chocolate.png'},
-        { id: '3', name: 'Strawberry', imageURL: 'strawberry.png'},
-        { id: '4', name: 'OrangeSorbet', imageURL: 'orangeSorbet.png'},
-    ];
-
-    for (const flavor of initialFlavors) {
-        const existingFlavor = await IceCream.findOne({ id: flavor.id });
-        if (!existingFlavor) {
-            const iceCream = new IceCream(flavor);
-            await iceCream.save();
-            console.log(`Added ${flavor.name} ice-cream to collection!`)
-        }
-    }
-}
 const updateAllUsers = async () => { // a test function for adding items to the unlockedIceCream array in the database
     try {
         const result = await User.updateMany(
@@ -51,6 +38,9 @@ const updateAllUsers = async () => { // a test function for adding items to the 
                     quantity: 7,
                     },
                 ],
+                "iceCreamStack": initialIceCreamStack,
+                // 🎃 add more fields for seeding data here
+                // todo: addInitialTideLevel too, and use updateAllUsers to update the user schema to inject that seed data
                 }
             } // Setting the "newFieldTest" to an empty array
         ).exec();
