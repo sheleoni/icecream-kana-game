@@ -56,7 +56,7 @@ export const initialTideLevel = {...tideLevel};
 
 export const addInitialTideLevel = async () => {
     for (const character in initialTideLevel) {
-        const characterTideLevel = initialTideLevel[character];
+        const characterTideLevel = initialTideLevel[character as keyof typeof initialTideLevel];
         const existingTideLevel = await userTideLevel.findOne({ character });
         if (!existingTideLevel) {
             const newTideLevel = new userTideLevel({
