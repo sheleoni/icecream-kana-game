@@ -52,9 +52,11 @@ export const addInitialIceCreamStack = async () => {
 
 // tide level
 
-export const initialTideLevel = {...tideLevel};
+export const initialTideLevel = {... tideLevel};
 
 export const addInitialTideLevel = async () => {
+    // console.log(initialTideLevel, `init tide level`);
+    const initialTideLevel = { ... tideLevel};
     for (const character in initialTideLevel) {
         const characterTideLevel = initialTideLevel[character as keyof typeof initialTideLevel];
         const existingTideLevel = await userTideLevel.findOne({ character });

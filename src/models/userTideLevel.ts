@@ -1,9 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
-const userTideLevelSchema = new Schema({
+export const userTideLevelSchema = new Schema({
     kana: String,
     tideLevel: Number,
-})
+},
+);
 
 const userTideLevel = models.userTideLevel || model('userTideLevel', userTideLevelSchema);
 

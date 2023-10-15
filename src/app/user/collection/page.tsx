@@ -8,7 +8,6 @@ import styles from './page.module.css';
 export const dynamic = "force-dynamic"
 const CollectionOverview = async () => {
     const session = await getServerSession();
-    console.log(session, `user`);
     const userIceCreamCollection = await getUserIceCream();
     console.log(userIceCreamCollection, 'wowza!')
     return (
