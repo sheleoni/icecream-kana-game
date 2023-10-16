@@ -55,17 +55,20 @@ export const addInitialIceCreamStack = async () => {
 export const initialTideLevel = {... tideLevel};
 
 export const addInitialTideLevel = async () => {
-    const initialTideLevel = { ... tideLevel};
+
+const newTideLevels = [];
     for (const character in initialTideLevel) {
         const characterTideLevel = initialTideLevel[character as keyof typeof initialTideLevel];
         const existingTideLevel = await userTideLevel.findOne({ character });
         if (!existingTideLevel) {
-            const newTideLevel = new userTideLevel({
+            newTideLevels.push({
                 character,
                 characterTideLevel
-            })
-            await newTideLevel.save();
-            console.log(`added tide level ${characterTideLevel} with tide level ${existingTideLevel} to DB!`)
-        } // todo: test this code
+            });
+        }
+    }
+
+    if (newTideLevels.length > 0) {
+        await userTideLevel.insertMany(newTideLevels); // insert tideLevel to all users at the same time
     }
 }
