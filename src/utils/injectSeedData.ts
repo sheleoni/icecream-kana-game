@@ -70,5 +70,6 @@ const newTideLevels = [];
 
     if (newTideLevels.length > 0) {
         await userTideLevel.insertMany(newTideLevels); // insert tideLevel to all users at the same time
+        console.log("added user tide levels")
     }
 }
