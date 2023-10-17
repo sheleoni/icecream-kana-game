@@ -54,14 +54,14 @@ export const addInitialIceCreamStack = async () => {
 
 export const initialTideLevel = {... tideLevel};
 
-export const addInitialTideLevel = async () => {
-
-const newTideLevels = [];
+export const addInitialTideLevelForUser = async (userId: string) => {
+    const newTideLevels = [];
     for (const character in initialTideLevel) {
         const characterTideLevel = initialTideLevel[character as keyof typeof initialTideLevel];
-        const existingTideLevel = await userTideLevel.findOne({ character });
+        const existingTideLevel = await userTideLevel.findOne({ userId, character });
         if (!existingTideLevel) {
             newTideLevels.push({
+                userId,
                 character,
                 characterTideLevel
             });
@@ -69,7 +69,6 @@ const newTideLevels = [];
     }
 
     if (newTideLevels.length > 0) {
-        await userTideLevel.insertMany(newTideLevels); // insert tideLevel to all users at the same time
-        console.log("added user tide levels")
+        await userTideLevel.insertMany(newTideLevels); // insert tideLevel only for the current user
     }
 }
