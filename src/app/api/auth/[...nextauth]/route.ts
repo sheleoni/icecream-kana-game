@@ -32,7 +32,7 @@ const handler = NextAuth({
                 const userId = user._id;
                 console.log(userExists, `userExists constant at next-auth route.ts`);
                 console.log(user._id, `user _id`);
-                await updateCurrentUser(userId);
+                // await updateCurrentUser(userId);
                 return true;
              } catch (error) {
                 console.log(error);
