@@ -36,6 +36,11 @@ const MenuBar = () => {
                     /Worksheets
                 </Link>
             </li>
+            <li>
+                <Link href={'/user/injectSeedData'} className={styles.menuLink}>
+                    /InjectSeedData (private)
+                </Link>
+            </li>
         </ul>
         </header>
     </React.Fragment>
