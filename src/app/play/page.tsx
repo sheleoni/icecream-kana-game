@@ -30,7 +30,7 @@ const Play = () => {
         totalScore += characterScore});
         return totalScore;
     }
-    const totalScore = getTotalScore(kanaScore);
+    const totalScore = getTotalScore(kanaScore) // totalScore is a derived state from kanaScore
 
     const generateQuestion = (): string => {
         const randomIndex = Math.floor(Math.random() * questionPool.length);
@@ -46,10 +46,20 @@ const Play = () => {
         }
     }, [questionPool])
 
+    const saveScore = async () => {
+        //  POST data to DB via route handlers here
+        const res = await fetch('/play/sendScore/', { method: 'POST'});
+        console.log(res);
+
+    }
+
     if (session && session.user) {
         // Logged in state
         return (
             <>
+                <button onClick={saveScore}>
+                    save score~
+                </button>
             <p>
                 Question Filter
                 <br />

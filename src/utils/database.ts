@@ -22,6 +22,7 @@ export const updateCurrentUser = async (currentUserId: string) => {
             return;
         }
         const userId = user._id;  // get user ID
+        console.log(userId, 'the userId');
         await addInitialTideLevelForUser(userId);
         const clonedTideLevel = { ...tideLevel };
         const clonedInitialIceCreamStack = [...initialIceCreamStack];
@@ -44,6 +45,9 @@ export const updateCurrentUser = async (currentUserId: string) => {
                 },
             }
         );
+        console.log(clonedTideLevel, 'clonedTideLevel')
+        console.log('ok update for this user is supposedly done!')
+
     } catch (error) {
         console.log('An error occurred:', error);
     }
