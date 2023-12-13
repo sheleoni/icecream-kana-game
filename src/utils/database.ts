@@ -22,8 +22,11 @@ export const updateCurrentUser = async (currentUserId: string) => {
             return;
         }
         const userId = user._id;  // get user ID
+        console.log(userId, 'the userId');
         await addInitialTideLevelForUser(userId);
-        const clonedTideLevel = { ...tideLevel };
+        const clonedTideLevel = Object.entries(tideLevel).map(([ kana, level]) => {
+            return { kana, level };
+        });
         const clonedInitialIceCreamStack = [...initialIceCreamStack];
         await User.updateOne(
             { _id: userId },
@@ -44,6 +47,9 @@ export const updateCurrentUser = async (currentUserId: string) => {
                 },
             }
         );
+        console.log(clonedTideLevel, 'clonedTideLevel')
+        console.log('ok update for this user is supposedly done!')
+
     } catch (error) {
         console.log('An error occurred:', error);
     }
