@@ -49,7 +49,6 @@ export const updateCurrentUser = async (currentUserId: string) => {
         );
         console.log(clonedTideLevel, 'clonedTideLevel')
         console.log('ok update for this user is supposedly done!')
-
     } catch (error) {
         console.log('An error occurred:', error);
     }
