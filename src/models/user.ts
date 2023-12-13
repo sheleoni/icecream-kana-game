@@ -16,7 +16,7 @@ const UserSchema = new Schema({
         type: String,
     },
     iceCreamStack: [userIceCreamStackSchema],
-    tideLevel: userTideLevelSchema,
+    tideLevel: [userTideLevelSchema],
     unlockedIceCreams: [
         {
             iceCream: {

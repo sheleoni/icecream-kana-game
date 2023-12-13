@@ -24,9 +24,9 @@ export const updateCurrentUser = async (currentUserId: string) => {
         const userId = user._id;  // get user ID
         console.log(userId, 'the userId');
         await addInitialTideLevelForUser(userId);
-        const clonedTideLevel = { kana: "ら", level: 3 };
-        console.log(clonedTideLevel, 'clonedTideLevel before update');
-        // const clonedTideLevel = { ...tideLevel };
+        const clonedTideLevel = Object.entries(tideLevel).map(([ kana, level]) => {
+            return { kana, level };
+        });
         const clonedInitialIceCreamStack = [...initialIceCreamStack];
         await User.updateOne(
             { _id: userId },
