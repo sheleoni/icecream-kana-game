@@ -2,6 +2,7 @@ import * as mongoose from "mongoose";
 import User from "@/models/user";
 import {addInitialTideLevelForUser, initialIceCreamStack} from "@/utils/injectSeedData";
 import tideLevel from "@/app/play/data/tideLevel";
+import {getServerSession} from "next-auth";
 
 export const connectDB = async () => {
     try {
@@ -14,6 +15,14 @@ export const connectDB = async () => {
     }
 };
 
+export const getUserIdByEmail = async (currentUserEmail?: string) => {
+    const session = await getServerSession(); // the headers must be passed in order to get the session in getServerSession
+    const userEmail = session?.user?.email || currentUserEmail;
+        const user = await User.findOne({
+            email: userEmail
+        });
+    return user._id;
+}
 export const updateCurrentUser = async (currentUserId: string) => {
     try {
         const user = await User.findById(currentUserId);
@@ -22,7 +31,7 @@ export const updateCurrentUser = async (currentUserId: string) => {
             return;
         }
         const userId = user._id;  // get user ID
-        console.log(userId, 'the userId');
+        console.log(userId, 'found - the userId');
         // await addInitialTideLevelForUser(userId);
         const clonedTideLevel = Object.entries(tideLevel).map(([ kana, level]) => {
             return { kana, level };
