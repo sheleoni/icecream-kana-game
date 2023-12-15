@@ -5,7 +5,6 @@ export const dynamic = 'force-dynamic';
 export async function POST() {
     console.log("hello you have posted")
     try {
-    await connectDB();
     await updateCurrentUser('64e7a35bf3b19fa4448640e4');
     } catch (error) {
         console.log(error);
