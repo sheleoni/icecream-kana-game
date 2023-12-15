@@ -47,6 +47,7 @@ const Play = () => {
     }, [questionPool])
 
     const saveScore = async () => {
+        console.log("saving score...")
         //  POST data to DB via route handlers here
         const res = await fetch('/play/sendScore/', { method: 'POST'});
         console.log(res);
