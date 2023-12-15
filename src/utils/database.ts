@@ -23,7 +23,7 @@ export const updateCurrentUser = async (currentUserId: string) => {
         }
         const userId = user._id;  // get user ID
         console.log(userId, 'the userId');
-        await addInitialTideLevelForUser(userId);
+        // await addInitialTideLevelForUser(userId);
         const clonedTideLevel = Object.entries(tideLevel).map(([ kana, level]) => {
             return { kana, level };
         });
