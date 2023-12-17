@@ -4,10 +4,13 @@
 import {getServerSession} from "next-auth";
 import getUserIceCream from "@/app/controllers/getUserIceCream";
 import styles from './page.module.css';
+import getUserTideLevel from "@/app/controllers/getUserTideLevel";
 
 export const dynamic = "force-dynamic"
 const CollectionOverview = async () => {
     const session = await getServerSession();
+    const userTideLevel = getUserTideLevel();
+    console.log(userTideLevel, 'USERRR TIDE LEVELLLLL')
     const userIceCreamCollection = await getUserIceCream();
     console.log(userIceCreamCollection, 'wowza!')
     return (
