@@ -9,7 +9,7 @@ import getUserTideLevel from "@/app/controllers/getUserTideLevel";
 export const dynamic = "force-dynamic"
 const CollectionOverview = async () => {
     const session = await getServerSession();
-    const userTideLevel = getUserTideLevel();
+    const userTideLevel = await getUserTideLevel();
     console.log(userTideLevel, 'USERRR TIDE LEVELLLLL')
     const userIceCreamCollection = await getUserIceCream();
     console.log(userIceCreamCollection, 'wowza!')

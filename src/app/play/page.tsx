@@ -11,15 +11,12 @@ import Link from 'next/link';
 import React, {useState} from "react";
 import Hexagons from "@/app/play/components/Hexagons/Hexagons";
 import scoreByKana from "@/app/play/data/scoreByKana";
-import getUserTideLevel from "@/app/controllers/getUserTideLevel";
 
 type IceCreamScoop = {
     name: string;
     imgURL: string;
 }
 const Play = () => {
-    const userTideLevel = getUserTideLevel();
-    console.log(userTideLevel, 'USERRR TIDE LEVELLLLL')
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);

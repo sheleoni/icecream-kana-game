@@ -14,8 +14,7 @@ export default async function getUserTideLevel () {
             email: userEmail
         });
         if (user) {
-            tideLevel = user.tideLevel
-            console.log(tideLevel, 'user tide level')
+            const tideLevel = user.tideLevel;
             return tideLevel;
         }
     }
