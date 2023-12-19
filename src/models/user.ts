@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 import {userIceCreamStackSchema} from "@/models/userIceCreamStack";
-import {userTideLevelSchema} from "@/models/userTideLevel";
+import userTideLevel, {userTideLevelSchema} from "@/models/userTideLevel";
 
 const UserSchema = new Schema({
     email: {

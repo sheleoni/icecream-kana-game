@@ -1,4 +1,5 @@
-const tideLevel = {
+const tideLevel =
+    {
     // hiragana
     "あ": 5,
     "い": 4,

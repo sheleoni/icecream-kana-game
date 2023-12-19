@@ -17,6 +17,7 @@ const GamePage = async () => {
         console.log(characterParsed.level, 'level after JSON parse');
         console.log(characterParsed.kana, 'kana');
     })
+
     return (
         <>
         <h1>
