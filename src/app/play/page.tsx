@@ -1,6 +1,6 @@
 import PlayArea from "@/app/play/components/PlayArea/PlayArea";
-import {getServerSession} from "next-auth";
 import getUserTideLevel from "@/app/controllers/getUserTideLevel";
+import {ReactNode} from "react";
 
 const GamePage = async () => {
     const userTideLevelData = await getUserTideLevel();
