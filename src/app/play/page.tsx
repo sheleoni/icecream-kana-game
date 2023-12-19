@@ -11,7 +11,7 @@ const GamePage = async () => {
         <>
         <h1>
             Hello game page, this is server-rendered
-            {userTideLevelArray.map((character: object): ReactNode => {
+            {userTideLevelArray.map((character: any): ReactNode => {
                 return (
                     <>
                         <p>
