@@ -17,13 +17,26 @@ type IceCreamScoop = {
     imgURL: string;
 }
 const PlayArea = (props: any) => { // todo: replace :any type
-    console.log(props.userTideLevel, "tide level from server props")
+
+    const getInitialTideLevel = () => {
+        if (Object.keys(props.userTideLevel).length > 0) {
+            console.log('Object.keys(props.userTideLevel).length > 0 IS SATISFIED')
+            return props.userTideLevel
+        } else {
+            console.log('RETURNING THE INITIAL TIDE LVEL')
+            return initialTideLevel
+        }
+    }
+
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
     const [ kanaScore, setKanaScore ] = useState<object>(scoreByKana);
-    const [ tideLevel, setTideLevel ] = useState<object>(initialTideLevel);
     const [ iceCreamStack, setIceCreamStack ] = useState<IceCreamScoop[]>([]);
+    const [ tideLevel, setTideLevel ] = useState<object>(getInitialTideLevel());
+
+    console.log(Boolean(props.userTideLevel), 'tide level!')
+    console.log(Object.keys(props.userTideLevel).length, 'tide level {} length')
     /* Picking a random character from the question pool START */
     const getTotalScore = (kanaScore: object) => {
         let totalScore = 0;
@@ -47,10 +60,28 @@ const PlayArea = (props: any) => { // todo: replace :any type
         }
     }, [questionPool])
 
+    const saveScore = async (tideLevel: any) => { // todo: refine :any type
+        console.log("saving score...")
+        //  POST data to DB via route handlers here
+        const res = await fetch('/play/sendScore/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // todo: pass current game tideLevel state as request body
+            body: JSON.stringify({ tideLevel })
+        });
+        console.log(res);
+    }
     if (session && session.user) {
         // Logged in state
         return (
             <>
+                <button onClick={() => {
+                    saveScore(tideLevel)
+                }}>
+                    SAVE
+                </button>
             <p>
                 Question Filter
                 <br />
