@@ -16,7 +16,7 @@ type IceCreamScoop = {
     name: string;
     imgURL: string;
 }
-const PlayArea = (props) => {
+const PlayArea = (props: any) => {
     console.log(props.userTideLevel, "tide level from server props")
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
