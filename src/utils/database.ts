@@ -1,7 +1,6 @@
 import * as mongoose from "mongoose";
 import User from "@/models/user";
 import {addInitialTideLevelForUser, initialIceCreamStack} from "@/utils/injectSeedData";
-import tideLevel from "@/app/play/data/tideLevel";
 import {getServerSession} from "next-auth";
 
 export const connectDB = async () => {
@@ -23,7 +22,7 @@ export const getUserIdByEmail = async (currentUserEmail?: string) => {
         });
     return user._id;
 }
-export const updateCurrentUser = async (currentUserId: string) => {
+export const updateCurrentUser = async (currentUserId: string, gameTideLevel: any) => { // todo: refine 'any' type here
     try {
         const user = await User.findById(currentUserId);
         if (!user) {
@@ -33,7 +32,9 @@ export const updateCurrentUser = async (currentUserId: string) => {
         const userId = user._id;  // get user ID
         console.log(userId, 'found - the userId');
         // await addInitialTideLevelForUser(userId);
-        const clonedTideLevel = Object.entries(tideLevel).map(([ kana, level]) => {
+
+        // todo: use game's tideLevel state instead of hard-coded tideLevel.js values
+        const clonedTideLevel = Object.entries(gameTideLevel).map(([ kana, level]) => {
             return { kana, level };
         });
         const clonedInitialIceCreamStack = [...initialIceCreamStack];
@@ -56,7 +57,6 @@ export const updateCurrentUser = async (currentUserId: string) => {
                 },
             }
         );
-        console.log(clonedTideLevel, 'clonedTideLevel')
         console.log('ok update for this user is supposedly done!')
     } catch (error) {
         console.log('An error occurred:', error);

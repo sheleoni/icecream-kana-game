@@ -3,14 +3,16 @@ import {NextResponse} from "next/server";
 import {getServerSession} from "next-auth";
 
 export const dynamic = 'force-dynamic';
-export async function POST() {
+export async function POST(req: Request) { // todo: refine :any type
     await connectDB();
     const session = await getServerSession();
     console.log(session?.user, 'session.user!!!!');
     const userId = await getUserIdByEmail();
     console.log(userId, 'get User Id By Email results!');
     try {
-    await updateCurrentUser(userId);
+    const requestObjectInJSON = await req.json();
+    console.log(requestObjectInJSON, 'game tide level!!! in request body')
+    await updateCurrentUser(userId, requestObjectInJSON.tideLevel);
     } catch (error) {
         console.log(error);
     }
