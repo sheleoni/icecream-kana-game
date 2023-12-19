@@ -1,6 +1,7 @@
 import {connectDB} from "@/utils/database";
 import {getServerSession} from "next-auth";
 import User from "@/models/user";
+
 export default async function getUserTideLevel () {
 
     await connectDB();
@@ -14,8 +15,7 @@ export default async function getUserTideLevel () {
             email: userEmail
         });
         if (user) {
-            const tideLevel = user.tideLevel;
-            return tideLevel;
+            return user.tideLevel;
         }
     }
 }
