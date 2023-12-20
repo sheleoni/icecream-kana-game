@@ -126,7 +126,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         )
     }
     return (
-        // Logged-out state
+        // Logged-out state todo: delete this after refactoring "logged out" state to render server-side component (assuming no client state is needed)
         <>
         <p>
             You are not logged in yet.

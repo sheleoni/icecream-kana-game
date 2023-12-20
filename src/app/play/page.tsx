@@ -1,7 +1,29 @@
 import PlayArea from "@/app/play/components/PlayArea/PlayArea";
 import getUserTideLevel from "@/app/controllers/getUserTideLevel";
+import {getServerSession} from "next-auth";
+import Link from "next/link";
+import React from "react";
 
 const GamePage = async () => {
+    const session = await getServerSession();
+    if (!session) { return (
+        <>
+            <p>
+                You are not logged in yet.
+            </p>
+            <Link
+                href={"https://hiragana-icecream.sheleoni.com/"}
+                style={{ color: "coral", fontSize: "4rem"}}
+                target={"_blank"}
+            >
+                👉 Click me! 👈
+            </Link>
+            <p>
+                Try out the game (in guest mode).
+            </p>
+        </>
+    ) }
+
     let userTideLevelData = await getUserTideLevel();
     const stringifiedUserTideLevel = JSON.stringify(userTideLevelData);
     const userTideLevelArray = JSON.parse(stringifiedUserTideLevel);
