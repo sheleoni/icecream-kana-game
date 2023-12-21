@@ -22,7 +22,7 @@ export const getUserIdByEmail = async (currentUserEmail?: string) => {
         });
     return user._id;
 }
-export const updateCurrentUser = async (currentUserId: string, gameTideLevel: any) => { // todo: refine 'any' type here
+export const updateCurrentUser = async (currentUserId: string, gameTideLevel: any, totalScore: Number) => { // todo: refine 'any' type here
     try {
         const user = await User.findById(currentUserId);
         if (!user) {
@@ -42,6 +42,7 @@ export const updateCurrentUser = async (currentUserId: string, gameTideLevel: an
             { _id: userId },
             {
                 $set: {
+                    "totalScore": totalScore,
                     "unlockedIceCreams": [
                         {
                             iceCream: '64e8f67fcdf0a19aba869ce5',

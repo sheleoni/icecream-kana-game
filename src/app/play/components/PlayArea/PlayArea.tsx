@@ -20,10 +20,8 @@ const PlayArea = (props: any) => { // todo: replace :any type
 
     const getInitialTideLevel = () => {
         if (Object.keys(props.userTideLevel).length > 0) {
-            console.log('Object.keys(props.userTideLevel).length > 0 IS SATISFIED')
             return props.userTideLevel
         } else {
-            console.log('RETURNING THE INITIAL TIDE LVEL')
             return initialTideLevel
         }
     }
@@ -35,8 +33,6 @@ const PlayArea = (props: any) => { // todo: replace :any type
     const [ iceCreamStack, setIceCreamStack ] = useState<IceCreamScoop[]>([]);
     const [ tideLevel, setTideLevel ] = useState<object>(getInitialTideLevel());
 
-    console.log(Boolean(props.userTideLevel), 'tide level!')
-    console.log(Object.keys(props.userTideLevel).length, 'tide level {} length')
     /* Picking a random character from the question pool START */
     const getTotalScore = (kanaScore: object) => {
         let totalScore = 0;
@@ -45,7 +41,6 @@ const PlayArea = (props: any) => { // todo: replace :any type
         return totalScore;
     }
     const totalScore = getTotalScore(kanaScore);
-
     const generateQuestion = (): string => {
         const randomIndex = Math.floor(Math.random() * questionPool.length);
         return questionPool[randomIndex]
@@ -60,7 +55,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         }
     }, [questionPool])
 
-    const saveScore = async (tideLevel: any) => { // todo: refine :any type
+    const saveScore = async (tideLevel: any, totalScore: Number): Promise<void> => { // todo: refine :any type
         console.log("saving score...")
         //  POST data to DB via route handlers here
         const res = await fetch('/play/sendScore/', {
@@ -69,7 +64,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
                 'Content-Type': 'application/json',
             },
             // todo: pass current game tideLevel state as request body
-            body: JSON.stringify({ tideLevel })
+            body: JSON.stringify({ tideLevel, totalScore })
         });
         console.log(res);
     }
@@ -78,12 +73,15 @@ const PlayArea = (props: any) => { // todo: replace :any type
         return (
             <>
                 <button onClick={() => {
-                    saveScore(tideLevel)
+                    saveScore(tideLevel, totalScore)
                 }}>
                     SAVE
                 </button>
             <p>
                 Question Filter
+                <p style={{fontSize: "40px", color: "coral"}}>
+                    YOU SCORE FETCHED FROM DB: {props.userTotalScoreData}
+                </p>
                 <br />
                 <QuestionFilter
                     questionPool={questionPool}
