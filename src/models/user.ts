@@ -8,6 +8,7 @@ const UserSchema = new Schema({
         unique: [true, 'Email already registered'],  // [true, (value if false)]
         required: [true, 'You must enter an email']
     },
+    totalScore: Number,
     name: {
         type: String,
         required: [true, 'You must enter a name!']

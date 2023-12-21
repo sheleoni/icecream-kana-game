@@ -12,7 +12,8 @@ export async function POST(req: Request) { // todo: refine :any type
     try {
     const requestObjectInJSON = await req.json();
     console.log(requestObjectInJSON, 'game tide level!!! in request body')
-    await updateCurrentUser(userId, requestObjectInJSON.tideLevel);
+    console.log(requestObjectInJSON.totalScore, 'total score!!!❤️ in request body')
+    await updateCurrentUser(userId, requestObjectInJSON.tideLevel, requestObjectInJSON.totalScore);
     } catch (error) {
         console.log(error);
     }
