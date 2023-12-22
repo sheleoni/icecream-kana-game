@@ -11,7 +11,7 @@ export async function POST(req: Request) { // todo: refine :any type
     console.log(userId, 'get User Id By Email results!');
     try {
     const requestObjectInJSON = await req.json(); // the JS object containing the request body
-    await updateCurrentUser(userId, requestObjectInJSON.tideLevel, requestObjectInJSON.totalScore, requestObjectInJSON.kanaScores);
+    await updateCurrentUser(userId, requestObjectInJSON.tideLevel, requestObjectInJSON.totalScore, requestObjectInJSON.kanaScores, requestObjectInJSON.iceCreamStack);
     } catch (error) {
         console.log(error);
     }
