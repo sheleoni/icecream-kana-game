@@ -20,16 +20,23 @@ const PlayArea = (props: any) => { // todo: replace :any type
 
     const getInitialTideLevel = () => {
         if (Object.keys(props.userTideLevel).length > 0) {
-            return props.userTideLevel
+            return props.userTideLevel;
         } else {
             return initialTideLevel
+        }
+    }
+    const getInitialKanaScores = () => {
+        if (Object.keys(props.userKanaScores).length > 0) {
+            return props.userKanaScores;
+        } else {
+            return scoreByKana;
         }
     }
 
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
-    const [ kanaScore, setKanaScore ] = useState<object>(scoreByKana);
+    const [ kanaScore, setKanaScore ] = useState<object>(getInitialKanaScores());
     const [ iceCreamStack, setIceCreamStack ] = useState<IceCreamScoop[]>([]);
     const [ tideLevel, setTideLevel ] = useState<object>(getInitialTideLevel());
 
@@ -55,7 +62,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         }
     }, [questionPool])
 
-    const saveScore = async (tideLevel: any, totalScore: Number): Promise<void> => { // todo: refine :any type
+    const saveScore = async (tideLevel: any, totalScore: Number, kanaScores: any): Promise<void> => { // todo: refine :any type
         console.log("saving score...")
         //  POST data to DB via route handlers here
         const res = await fetch('/play/sendScore/', {
@@ -64,7 +71,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
                 'Content-Type': 'application/json',
             },
             // todo: pass current game tideLevel state as request body
-            body: JSON.stringify({ tideLevel, totalScore })
+            body: JSON.stringify({ tideLevel, totalScore, kanaScores})
         });
         console.log(res);
     }
@@ -73,7 +80,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         return (
             <>
                 <button onClick={() => {
-                    saveScore(tideLevel, totalScore)
+                    saveScore(tideLevel, totalScore, kanaScore)
                 }}>
                     SAVE
                 </button>

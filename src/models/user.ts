@@ -1,6 +1,7 @@
 import { Schema, model, models } from 'mongoose';
 import {userIceCreamStackSchema} from "@/models/userIceCreamStack";
 import userTideLevel, {userTideLevelSchema} from "@/models/userTideLevel";
+import {userKanaScoreSchema} from "@/models/userKanaScores";
 
 const UserSchema = new Schema({
     email: {
@@ -17,6 +18,7 @@ const UserSchema = new Schema({
         type: String,
     },
     iceCreamStack: [userIceCreamStackSchema],
+    kanaScores: [userKanaScoreSchema],
     tideLevel: [userTideLevelSchema],
     unlockedIceCreams: [
         {

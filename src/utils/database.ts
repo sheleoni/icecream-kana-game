@@ -22,7 +22,7 @@ export const getUserIdByEmail = async (currentUserEmail?: string) => {
         });
     return user._id;
 }
-export const updateCurrentUser = async (currentUserId: string, gameTideLevel: any, totalScore: Number) => { // todo: refine 'any' type here
+export const updateCurrentUser = async (currentUserId: string, gameTideLevel: any, totalScore: Number, kanaScores: any) => { // todo: refine 'any' type here
     try {
         const user = await User.findById(currentUserId);
         if (!user) {
@@ -33,7 +33,9 @@ export const updateCurrentUser = async (currentUserId: string, gameTideLevel: an
         console.log(userId, 'found - the userId');
         // await addInitialTideLevelForUser(userId);
 
-        // todo: use game's tideLevel state instead of hard-coded tideLevel.js values
+        const clonedKanaScores = Object.entries(kanaScores).map(([ kana, score]) => {
+            return { kana, score }
+        });
         const clonedTideLevel = Object.entries(gameTideLevel).map(([ kana, level]) => {
             return { kana, level };
         });
@@ -43,6 +45,7 @@ export const updateCurrentUser = async (currentUserId: string, gameTideLevel: an
             {
                 $set: {
                     "totalScore": totalScore,
+                    "kanaScores": clonedKanaScores,
                     "unlockedIceCreams": [
                         {
                             iceCream: '64e8f67fcdf0a19aba869ce5',

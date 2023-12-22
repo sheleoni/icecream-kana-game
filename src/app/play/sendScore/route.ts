@@ -10,10 +10,8 @@ export async function POST(req: Request) { // todo: refine :any type
     const userId = await getUserIdByEmail();
     console.log(userId, 'get User Id By Email results!');
     try {
-    const requestObjectInJSON = await req.json();
-    console.log(requestObjectInJSON, 'game tide level!!! in request body')
-    console.log(requestObjectInJSON.totalScore, 'total score!!!❤️ in request body')
-    await updateCurrentUser(userId, requestObjectInJSON.tideLevel, requestObjectInJSON.totalScore);
+    const requestObjectInJSON = await req.json(); // the JS object containing the request body
+    await updateCurrentUser(userId, requestObjectInJSON.tideLevel, requestObjectInJSON.totalScore, requestObjectInJSON.kanaScores);
     } catch (error) {
         console.log(error);
     }
