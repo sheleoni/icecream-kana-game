@@ -33,11 +33,19 @@ const PlayArea = (props: any) => { // todo: replace :any type
         }
     }
 
+    const getInitialIceCreamStack = () => {
+        if (Object.keys(props.useIceCreamStackData).length > 0) {
+            return props.useIceCreamStackData;
+        } else {
+            return [];
+        }
+    }
+
     const { data: session } = useSession(); // useSession is a client component
     const [ currentQuestionLetter, setCurrentQuestionLetter] = React.useState<string>('あ');
     const [ questionPool, setQuestionPool] = useState<string[]>([]);
     const [ kanaScore, setKanaScore ] = useState<object>(getInitialKanaScores());
-    const [ iceCreamStack, setIceCreamStack ] = useState<IceCreamScoop[]>([]);
+    const [ iceCreamStack, setIceCreamStack ] = useState<IceCreamScoop[]>(getInitialIceCreamStack());
     const [ tideLevel, setTideLevel ] = useState<object>(getInitialTideLevel());
 
     /* Picking a random character from the question pool START */
@@ -62,7 +70,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         }
     }, [questionPool])
 
-    const saveScore = async (tideLevel: any, totalScore: Number, kanaScores: any): Promise<void> => { // todo: refine :any type
+    const saveScore = async (tideLevel: any, totalScore: Number, kanaScores: any, iceCreamStack: any): Promise<void> => { // todo: refine :any type
         console.log("saving score...")
         //  POST data to DB via route handlers here
         const res = await fetch('/play/sendScore/', {
@@ -71,7 +79,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
                 'Content-Type': 'application/json',
             },
             // todo: pass current game tideLevel state as request body
-            body: JSON.stringify({ tideLevel, totalScore, kanaScores})
+            body: JSON.stringify({ tideLevel, totalScore, kanaScores, iceCreamStack})
         });
         console.log(res);
     }
@@ -80,7 +88,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         return (
             <>
                 <button onClick={() => {
-                    saveScore(tideLevel, totalScore, kanaScore)
+                    saveScore(tideLevel, totalScore, kanaScore, iceCreamStack)
                 }}>
                     SAVE
                 </button>

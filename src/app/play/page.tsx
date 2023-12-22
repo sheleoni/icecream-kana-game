@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import getUserTotalScore from "@/app/controllers/getUserTotalScore";
 import getUserKanaScores from "@/app/controllers/getUserKanaScores";
+import getUserIceCreamStack from "@/app/controllers/getUserIceCreamStack";
 
 const GamePage = async () => {
     const session = await getServerSession();
@@ -30,13 +31,24 @@ const GamePage = async () => {
     let userTideLevelData = await getUserTideLevel();
     const stringifiedUserTideLevel = JSON.stringify(userTideLevelData);
     const userTideLevelArray = JSON.parse(stringifiedUserTideLevel);
-    if (userTideLevelData.length === 0) {
+    if (userTideLevelData.length === 0) { // todo: check if this should be userTideLevelArray.length instead
         userTideLevelData = null;
     }
     const tideLevel = userTideLevelArray.reduce((accumulator: any, { kana, level }: any) => { // todo: replace :any type
         accumulator[kana] = level;
         return accumulator;
     }, {});
+
+    // load iceCreamStack from DB
+    let userIceCreamStackData = await getUserIceCreamStack();
+    const stringifiedUserIceCreamStack = JSON.stringify(userIceCreamStackData);
+    const userIceCreamStackArray = JSON.parse(stringifiedUserIceCreamStack);
+    if (userIceCreamStackArray.length === 0) {
+        userIceCreamStackData = null;
+    }
+    // at this point, userIceCreamStackArray is a JS object where you can access its properties
+    console.log(userIceCreamStackArray[0].imgURL, 'ICE CREAM STACK ARRAY[0]!!!')
+    const iceCreamStackData = userIceCreamStackArray;
 
     // load kanaScores from DB
     let userKanaScoresData = await getUserKanaScores();
@@ -55,7 +67,7 @@ const GamePage = async () => {
     return (
         <>
             <h1>Hello game page, this is server-rendered</h1>
-            <PlayArea userTideLevel={tideLevel} userTotalScoreData={userTotalScoreData} userKanaScores={kanaScores}/>
+            <PlayArea userTideLevel={tideLevel} userTotalScoreData={userTotalScoreData} userKanaScores={kanaScores} useIceCreamStackData={iceCreamStackData}/>
         {/*    todo: cater to new users - if use does not have tideLevel stored, use the default tideLevel.js on the client */}
         </>
     );
