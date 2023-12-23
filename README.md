@@ -1,5 +1,5 @@
 ## Deployed URL
-https://icecream.sheleoni.com/
+### https://icecream.sheleoni.com/
 
 ## Previous Repo
 This is a refactored version of https://github.com/sheleoni/hiragana-icecream , which previously was deployed on Netlify using Vite. 
