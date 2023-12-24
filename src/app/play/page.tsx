@@ -46,8 +46,7 @@ const GamePage = async () => {
     if (userIceCreamStackArray.length === 0) {
         userIceCreamStackData = null;
     }
-    // at this point, userIceCreamStackArray is a JS object where you can access its properties
-    console.log(userIceCreamStackArray[0].imgURL, 'ICE CREAM STACK ARRAY[0]!!!')
+        // at this point, userIceCreamStackArray is a JS object where you can access its properties
     const iceCreamStackData = userIceCreamStackArray;
 
     // load kanaScores from DB
