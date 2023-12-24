@@ -10,6 +10,30 @@
     cursor: default;
 }
 
+.storeIceCreamButton {
+    cursor: pointer;
+    background-color: #efab19;
+    margin-block-start: 20px;
+    width: 80%;
+    text-transform: capitalize;
+    padding-block-start: 5px;
+    font-size: 2rem;
+    padding-block: 10px;
+    position: sticky; /* todo: make score sticky on iceCreamStack area when scrolling down the icecream*/
+    top: 0;
+    border: none;
+    outline: 3px solid #c47206;
+    border-radius: 2rem;
+}
+
+.storeIceCreamButton:hover {
+    background-color: #e19d0f;
+}
+
+.storeIceCreamButton:active {
+    background-color: #d9910a;
+}
+
 .iceCreamContainer {
     display: flex;
     flex-direction: column-reverse;

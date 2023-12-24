@@ -56,7 +56,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
         return totalScore;
     }
     const totalScore = getTotalScore(kanaScore);
-    const generateQuestion = (): string => {
+    const newQuestion = (): string => {
         const randomIndex = Math.floor(Math.random() * questionPool.length);
         return questionPool[randomIndex]
     }
@@ -65,7 +65,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
             // We need useEffect here because if we don't,
             // a random character will be generated whenever the user clicks to another tab and comes back
             // (this happens in both dev mode and production mode)
-            const currentQuestionLetter = generateQuestion();
+            const currentQuestionLetter = newQuestion();
             setCurrentQuestionLetter(currentQuestionLetter);
         }
     }, [questionPool])
@@ -90,7 +90,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
                 <button onClick={() => {
                     saveScore(tideLevel, totalScore, kanaScore, iceCreamStack)
                 }}>
-                    SAVE
+                    SAVE PROGRESS
                 </button>
             <p>
                 Question Filter
@@ -107,7 +107,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
             <main className={styles.gameGrid}>
                 <p className={styles.QuestionWord}>
                     <QuestionWord
-                        generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
+                        generateQuestion={():void => setCurrentQuestionLetter(newQuestion)}
                         currentQuestionLetter={currentQuestionLetter}
                     />
                 </p>
@@ -118,7 +118,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
                         currentQuestionLetter={currentQuestionLetter}
                         kanaScore={kanaScore}
                         setKanaScore={setKanaScore}
-                        generateQuestion={():void => setCurrentQuestionLetter(generateQuestion)}
+                        generateQuestion={():void => setCurrentQuestionLetter(newQuestion)}
                     />
                 </p>
                 <p className={styles.Hexagons}>
@@ -131,6 +131,7 @@ const PlayArea = (props: any) => { // todo: replace :any type
                 </p>
                 <p className={styles.IceCreamStack}>
                     <IceCreamStack
+                        setIceCreamStack={setIceCreamStack}
                         iceCreamStack={iceCreamStack}
                         score={totalScore} />
                 </p>

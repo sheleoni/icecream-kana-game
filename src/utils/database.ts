@@ -39,7 +39,6 @@ export const updateCurrentUser = async (currentUserId: string, gameTideLevel: an
         const clonedTideLevel = Object.entries(gameTideLevel).map(([ kana, level]) => {
             return { kana, level };
         });
-        const clonedInitialIceCreamStack = [...initialIceCreamStack];
         await User.updateOne(
             { _id: userId },
             {
@@ -66,3 +65,56 @@ export const updateCurrentUser = async (currentUserId: string, gameTideLevel: an
         console.log('An error occurred:', error);
     }
 };
+
+export const addToIceCreamCollection = async (currentUserId: string, iceCreamStack: any) => {
+    try {
+        const user = await User.findById(currentUserId);
+        if (!user) {
+            console.log('User not found');
+            return;
+        }
+        const userId = user._id;  // get user ID
+        console.log(userId, 'found - the userId in addToIceCreamCollection!!!');
+        console.log(iceCreamStack, 'ICE CREAM STACK in addToIceCreamCollection')
+        await User.updateOne(
+            { _id: userId },
+            {
+                $push: {
+                    "iceCreamCollection": iceCreamStack,
+                },
+            }
+        ).exec().then(() => {
+            console.log("addToIceCreamCollection success");
+        }).catch((err) => {
+            console.error("Error updating in addToIceCreamCollection(): ", err);
+        });
+    } catch (error) {
+        console.log('An error occurred:', error);
+    }
+}
+
+export const updateIceCreamStackInDatabase = async (currentUserId: string, iceCreamStack: []) => { // todo: maybe refine [] type to better reflect an empty array
+    // updates ice cream stack in database according to the value in iceCreamStack parameter
+    try {
+        const user = await User.findById(currentUserId);
+        if (!user) {
+            console.log('User not found');
+            return;
+        }
+        const userId = user._id;  // get user ID
+        await User.updateOne(
+            { _id: userId },
+            {
+                $set: {
+                    "iceCreamStack": iceCreamStack,
+                },
+            }
+        ).exec().then(() => {
+            console.log("updateIceCreamStackInDatabase success");
+        }).catch((err) => {
+            console.error("Error updating in updateIceCreamStackInDatabase(): ", err);
+        });
+    } catch (error) {
+        console.log('An error occurred:', error);
+    }
+}

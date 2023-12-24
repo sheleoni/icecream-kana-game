@@ -18,6 +18,7 @@ const UserSchema = new Schema({
         type: String,
     },
     iceCreamStack: [userIceCreamStackSchema],
+    iceCreamCollection: [userIceCreamStackSchema],
     kanaScores: [userKanaScoreSchema],
     tideLevel: [userTideLevelSchema],
     unlockedIceCreams: [

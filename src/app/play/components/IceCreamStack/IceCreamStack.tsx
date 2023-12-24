@@ -11,8 +11,9 @@ type IceCreamScoop = {
 type Props = {
     score: number,
     iceCreamStack: IceCreamScoop[],
+    setIceCreamStack: any // todo: refine any type
 }
-const IceCreamStack = ({ score, iceCreamStack }: Props) => {
+const IceCreamStack = ({ score, iceCreamStack, setIceCreamStack }: Props) => {
     const iceCreamScoops = [
         // todo: change temporary icecream scoops array to prop from parent component (and probably inject initial data from DB)
         {
@@ -31,11 +32,55 @@ const IceCreamStack = ({ score, iceCreamStack }: Props) => {
         },
     ]
 
+    const saveIceCreamToCollection = async (iceCreamStack: any[]) => { // todo: refine :any type
+        // POST the current ice-cream stack to the DB (not overriding ice cream collection, but ADDing to the ice-cream stack collection)
+        // NOT POSTing to the 'iceCreamStack', but the 'iceCreamCollection'
+        console.log("transferring ice cream stack to ice cream collection...");
+        const res = await fetch ('/play/addToIceCreamCollection/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ iceCreamStack })
+        });
+        console.log(res, 'response from fetching in saveIceCreamToCollection');
+    }
+
+    const clearIceCreamStackInDatabase = async () => {
+        const res = await fetch('/play/updateIceCreamStackInDatabase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ iceCreamStack: [] })
+        });
+        console.log(res, 'response from fetching in clearIceCreamStackInDatabase')
+    }
+
+    const clearIceCreamStack = (setIceCreamStack: any) => { // todo: refine :any type
+        // clears the current ice-cream stack on the UI.
+        setIceCreamStack([]);
+        // Beware: you must run this AFTER POSTing the previous ice-cream stack to the server
+        // (sending to ice-cream stack collection) or else users will lose the ice-cream scoop forever.
+    }
+
+
     return (
         <aside className={styles.scoreContainer}>
         <p className={styles.scoreNumber}>
             Your score: {score}
         </p>
+        <button
+            className={styles.storeIceCreamButton}
+            onClick={() => {
+                // todo: deal with the returned promises here
+                saveIceCreamToCollection(iceCreamStack);
+                clearIceCreamStackInDatabase();
+                clearIceCreamStack(setIceCreamStack);
+        }}>
+           Store 🍦→ 📦
+        </button>
+
         <ul className={styles.iceCreamContainer} style={{marginBlockStart: 150}}>
             <li>
                 <Tooltip.Provider delayDuration={1500}>
