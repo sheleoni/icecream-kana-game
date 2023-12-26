@@ -3,3 +3,9 @@
     font-size: 2rem;
     padding-block: 10px;
 }
+
+.droppableArea {
+    color: #535bf2;
+    width: 500px;
+    height: 300px;
+}
