@@ -1,4 +1,3 @@
-// 'use client'
 // todo: prop interface
 
 import {getServerSession} from "next-auth";
@@ -7,6 +6,7 @@ import styles from './page.module.css';
 import getUserTideLevel from "@/app/controllers/getUserTideLevel";
 import getUserIceCreamCollection from "@/app/controllers/getUserIceCreamCollection";
 import Image from "next/image";
+import DropArea from "@/app/user/collection/components/DropArea";
 
 export const dynamic = "force-dynamic"
 
@@ -39,7 +39,7 @@ const CollectionOverview = async () => {
                     )
                 })
             }
-
+            <DropArea />
         </>
     )
 }
