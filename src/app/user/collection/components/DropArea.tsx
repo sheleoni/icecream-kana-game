@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./DropArea.module.css";
+import React from "react";
 
 const DropArea = () => {
 
