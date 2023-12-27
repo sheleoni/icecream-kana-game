@@ -1,12 +1,12 @@
 'use client';
-
+// todo: change file name to DragAndDrop
 import Image from "next/image";
 import styles from "./DropArea.module.css";
 import React from "react";
 
 const DropArea = ({userIceCreamCollection}: any) => {
 
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = (event: React.DragEvent<HTMLUListElement>) => {
         event.preventDefault();
         let draggedData = event.dataTransfer.getData("text");
         const elementToAppend = document.getElementById(draggedData);
@@ -17,7 +17,7 @@ const DropArea = ({userIceCreamCollection}: any) => {
         }
     }
 
-    const allowDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const allowDrop = (event: React.DragEvent<HTMLUListElement>) => {
         event.preventDefault();
     }
 
@@ -32,7 +32,8 @@ const DropArea = ({userIceCreamCollection}: any) => {
                 // todo: consider if index should be used in the id attribute
                 userIceCreamCollection?.map((iceCream: any, index: any): any => { // todo: refine any type
                     return (
-                        <>
+                        <li
+                            key={index} className={styles.draggableScoopList}>
                         <Image
                             id={`draggable_object_${index}`}
                             alt={iceCream.name}
@@ -44,7 +45,7 @@ const DropArea = ({userIceCreamCollection}: any) => {
                             draggable={true}
                         />
                             {iceCream.name}
-                        </>
+                        </li>
                     )
                 })
             }
@@ -60,12 +61,12 @@ const DropArea = ({userIceCreamCollection}: any) => {
                 />
             </p>
             {/* todo: (event) => handleDrop(event) works too. Research which way is better. */}
-            <div className={styles.droppableArea}
+            <ul className={styles.droppableArea}
                  id="dumpArea"
                  onDrop={handleDrop}
                  onDragOver={allowDrop}>
                 Hello drop me something
-            </div>
+            </ul>
         </>
     );
 }
