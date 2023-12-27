@@ -2,7 +2,8 @@
 // todo: change file name to DragAndDrop
 import Image from "next/image";
 import styles from "./DropArea.module.css";
-import React from "react";
+import React, {Suspense} from "react";
+import Loading from "@/app/user/collection/components/loading";
 
 const DropArea = ({userIceCreamCollection}: any) => {
 
@@ -27,6 +28,7 @@ const DropArea = ({userIceCreamCollection}: any) => {
 
     return (
         <>
+            <Suspense fallback={<Loading />}>
             <p>Hey client area here!</p>
             {
                 // todo: consider if index should be used in the id attribute
@@ -49,6 +51,7 @@ const DropArea = ({userIceCreamCollection}: any) => {
                     )
                 })
             }
+            </Suspense>
             <p> Success Draggable Ice-cream scoop <br/>
                 <Image
                     src="https://res.cloudinary.com/dd1dw34dc/image/upload/v1684249747/hiragana_game/icecream_scoops/%E3%81%86%E3%81%AA%E3%81%8D%E3%82%99_hejix5.png"
