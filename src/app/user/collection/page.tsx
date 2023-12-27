@@ -10,7 +10,7 @@ import DropArea from "@/app/user/collection/components/DropArea";
 
 export const dynamic = "force-dynamic"
 
-// todo: get collection dat ahere
+// todo: get collection data here
 const CollectionOverview = async () => {
     const session = await getServerSession();
     const userIceCreamCollectionNEW = await getUserIceCreamCollection();

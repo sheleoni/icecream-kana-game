@@ -7,3 +7,7 @@
     background-color: #535bf2;
     overflow: scroll;
 }
+
+.draggableScoopList {
+    display: inline-block;
+}
