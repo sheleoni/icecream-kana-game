@@ -32,14 +32,7 @@ const CollectionOverview = async () => {
                     )
                 })
             }
-            {
-                userIceCreamCollectionNEW?.map((iceCream: any, index: any): any => { // todo: refine any type
-                    return (
-                        <Image alt={iceCream.name} key={index} src={iceCream.imgURL}  width={140} height={150}/>
-                    )
-                })
-            }
-            <DropArea />
+            <DropArea userIceCreamCollection={userIceCreamCollectionNEW} />
         </>
     )
 }

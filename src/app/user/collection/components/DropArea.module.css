@@ -5,4 +5,5 @@
     margin-block-start: 10px;
     margin: 0 auto;
     background-color: #535bf2;
+    overflow: scroll;
 }
