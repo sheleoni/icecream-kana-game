@@ -30,12 +30,15 @@ const DropArea = ({userIceCreamCollection}: any) => {
         <>
             <Suspense fallback={<Loading />}>
             <p>Hey client area here!</p>
+                <ul onDrop={handleDrop} onDragOver={allowDrop}>
             {
                 // todo: consider if index should be used in the id attribute
                 userIceCreamCollection?.map((iceCream: any, index: any): any => { // todo: refine any type
                     return (
                         <li
-                            key={index} className={styles.draggableScoopList}>
+                            key={index}
+                            className={styles.draggableScoopList}
+                        >
                         <Image
                             id={`draggable_object_${index}`}
                             alt={iceCream.name}
@@ -51,6 +54,7 @@ const DropArea = ({userIceCreamCollection}: any) => {
                     )
                 })
             }
+                </ul>
             </Suspense>
             <p> Success Draggable Ice-cream scoop <br/>
                 <Image
@@ -67,7 +71,8 @@ const DropArea = ({userIceCreamCollection}: any) => {
             <ul className={styles.droppableArea}
                  id="dumpArea"
                  onDrop={handleDrop}
-                 onDragOver={allowDrop}>
+                 onDragOver={allowDrop}
+            >
                 Hello drop me something
             </ul>
         </>
